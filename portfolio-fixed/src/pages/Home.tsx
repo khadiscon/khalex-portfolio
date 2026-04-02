@@ -1,0 +1,196 @@
+import { motion } from 'motion/react';
+import { Play, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+
+export default function Home() {
+  return (
+    <div className="shutter-entrance">
+      {/* Hero Section */}
+      <section className="relative h-screen w-full overflow-hidden flex items-end pb-24">
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-black/40 z-10"></div>
+          <img 
+            className="w-full h-full object-cover" 
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwX6lPeUsaP66Zt02sw9P8DXqW9NgCoQlwY50cpYGSXwcQAd9bw2cbY7p14c8gmZNPD4oQaTwOLvLutixxA3WzC01YGkBRBbO13-21cvK_oGdvwc6sSgIkJfkmBFk0TN6LCfiCQ0rrIRlqj9PpoNXh_BfXZaBAb7w0QaJUCnhYDCjO4XTYkRCD8qGFMzS32AMo1m0tTFzMN56gjiss-o6oBRwBOCyzXAO-FdqKV5IdnmJcL52qwDlyghOqMrjnL5L7rSVz33y9gws" 
+            alt="Cinematic motion graphics workspace"
+            referrerPolicy="no-referrer"
+          />
+          <div className="absolute inset-0 cinematic-gradient z-20"></div>
+        </div>
+        
+        <div className="relative z-30 px-8 md:pl-28 w-full max-w-7xl">
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="font-headline text-secondary tracking-[0.3em] uppercase mb-4 text-sm font-bold"
+          >
+            Showreel 2025
+          </motion.p>
+          <motion.h1 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="font-headline text-6xl md:text-8xl font-black tracking-tighter leading-[0.9] mb-8 max-w-4xl"
+          >
+            Crafting <span className="text-primary">Motion.</span><br/>Building Worlds.
+          </motion.h1>
+          
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+            className="flex flex-wrap gap-6 items-center"
+          >
+            <Link to="/projects" className="bg-primary text-black px-10 py-4 rounded-sm font-bold text-lg flex items-center gap-3 transition-all hover:shadow-[0_0_20px_#b89fff]">
+              View My Work
+              <ArrowRight className="w-5 h-5" />
+            </Link>
+            <button className="flex items-center gap-4 group">
+              <div className="w-14 h-14 rounded-full border border-outline-variant flex items-center justify-center group-hover:bg-secondary group-hover:border-secondary transition-all">
+                <Play className="w-6 h-6 text-white group-hover:text-black fill-current" />
+              </div>
+              <span className="font-headline font-bold uppercase tracking-widest text-sm">Play Showreel</span>
+            </button>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Featured Artifacts */}
+      <section className="bg-background py-32 px-8">
+        <div className="max-w-[1400px] mx-auto">
+          <div className="flex flex-col md:flex-row justify-between items-baseline mb-20 gap-8">
+            <h2 className="font-headline text-5xl font-black tracking-tight">Featured <span className="text-secondary">Artifacts</span></h2>
+            <p className="font-body text-on-surface-variant max-w-md leading-relaxed">
+              A curated selection of motion work and visual stories built for brands, creators, and campaigns that demand attention.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+            {/* Main Feature */}
+            <Link to="/projects/neon-fragments" className="md:col-span-8 group relative overflow-hidden rounded-md bg-surface-low aspect-video">
+              <img 
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-emaU8krLKDNQY22di4ALZXJSVJONsmj_xXSIEjuoZlod7hRZr_hLy9GCS4o6yfFV9oAes4Pwhp0DUjS1SwMXnDrAwXZDvRq6v_I8SXE2snotIjnCnC4kHs6GYCCdzEmjQ5v5zbompuljKH_DRkIzMvOK3qC2KoGlTIk3jz11vF3LBDT5BsACaWYV10d4iU3ws2nhdWa26OxTdCerKn6uENp-AFB0jK0WbjyCWdb-gy8IkveMBHgR77H1ySlObvxCJ8LyPQLqQwg" 
+                alt="Neon Fluidity"
+                referrerPolicy="no-referrer"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 p-8 flex flex-col justify-end">
+                <span className="text-secondary font-headline text-sm font-bold tracking-widest uppercase mb-2">3D Motion / Branding</span>
+                <h3 className="text-3xl font-headline font-black mb-4">NEON FLUIDITY</h3>
+                <div className="flex gap-4">
+                  <span className="text-xs font-body uppercase tracking-widest px-3 py-1 bg-white/10 backdrop-blur-md rounded-full">Cinema 4D</span>
+                  <span className="text-xs font-body uppercase tracking-widest px-3 py-1 bg-white/10 backdrop-blur-md rounded-full">Octane</span>
+                </div>
+              </div>
+            </Link>
+
+            {/* Side Info */}
+            <div className="md:col-span-4 flex flex-col gap-6">
+              <div className="bg-surface-high p-8 flex-1 rounded-md border-l-2 border-primary/30">
+                <div className="text-primary mb-4">
+                  <motion.div animate={{ rotate: 360 }} transition={{ duration: 20, repeat: Infinity, ease: "linear" }}>
+                    <svg className="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M12 2v20M2 12h20" />
+                    </svg>
+                  </motion.div>
+                </div>
+                <h4 className="font-headline font-bold text-xl mb-2 uppercase">Directed Intent</h4>
+                <p className="text-on-surface-variant text-sm leading-relaxed">Every frame is intentional. I build visual experiences that stop the scroll and leave a lasting impression.</p>
+              </div>
+              <div className="bg-surface-low p-8 flex-1 rounded-md relative overflow-hidden">
+                <h4 className="font-headline font-bold text-xl mb-2 uppercase">Work Process</h4>
+                <ul className="text-sm font-body space-y-3 text-on-surface-variant">
+                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-secondary rounded-full"></span> Concept & Strategy</li>
+                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-secondary rounded-full"></span> Motion Production</li>
+                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-secondary rounded-full"></span> Distribution & Growth</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Small Tiles */}
+            {[
+              { title: 'FUI DESIGN', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBUPVSwyLRqSxbldYBaE02SKja_SY0zwcAphw9PIIT7DUo1XXOEc9zMfznkqC3GAl6CoUQIOus--ew1E9bUqXbcwfPGTiVgpCRYug1NXKONlD_-7yGQIbNJAiwFeV1rMMk_cUifna25ZH3VHtFQfILVCJR5ORvltfaVIORcSxHYKs5sgBJqtfK9sBG2Wg4qPi7xzXGMkFJUBDsb91vJvJjN9_E4FizDFtDXPMujOcNs3weq4HSf7ztj7a7vzMohY26frYCptZfHusA' },
+              { title: 'GLITCH FX', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAL-BR8Hw-hVj11J7fkRcUxCB_92m725uTMb6Mk-uVeDekTs7ic_lYeBHDPIt0yA19OlVyrBH-ju9eX0IysiCxVwJLwga5IFEY21OzrGNM-EYY12BbzyekKGmMdk4cBRDyUZHxLNWlwZSxiVQHKRRaH2tLtYXXhIbcgN6CRRPPV-xYXZUn2wO7y4SCwNGRtdpJW8Dh4XHojPpGUQh45Ow4mwMUrkNbBba7U6Gob9rPPEY8yBL9Ziohmw4AmY2rSTYV9qpJ09hslo8Q' },
+              { title: 'MINIMAL MOTION', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAspBMvPGId9VvcHVPsIu-SSo5NtGlUvfNJdSNdEt3wS8qTLBEDgzErId5qWMRknNX0cq4EReJ6C8qugBhh5sfn-uGMUGOxAacYDz9cVS6Ex3uizqZAvtR5bOb4PzkGRcpf1JBq6LukLkxvraeJnUN4SiLNf4iEbUg9HZiN9m2mv6yK7pQ6en-TQ1fphTLzyOrc_gxwd7O1ery-sRJrIhfW-72k4QWKfjp0V3WA0RR6j_t90snVwpZpw5dXkTnIFA4BwflYIjoMCyE' }
+            ].map((tile) => (
+              <div key={tile.title} className="md:col-span-4 group relative overflow-hidden rounded-md bg-surface-low aspect-square">
+                <img 
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                  src={tile.img} 
+                  alt={tile.title}
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 bg-neutral-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                  <span className="text-white font-headline font-bold border border-white/30 px-4 py-2 backdrop-blur-sm">{tile.title}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Reel Section */}
+      <section className="py-24 bg-surface-low">
+        <div className="max-w-[1400px] mx-auto px-8">
+          <div className="bg-surface-highest p-4 rounded-xl shadow-2xl overflow-hidden">
+            <div className="relative aspect-video bg-black rounded-lg group overflow-hidden">
+              <img 
+                className="w-full h-full object-cover opacity-60" 
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBITP-ztydYC29DzG75APrU8RkqQNKyrAdFpdRhbibUSMmjBv7P6KQJfj-_B8EdfRaEgfokTWhZqvd14iNrmcGHgQQadcJDCJd6nhimROOIsliXmFlcVezb09mVqKVKoj9vn_8QlorI21rkbywZsuV222y0AJL-PMi00NPMFiGP5hfbfLcy2hzJdCVf_m9PrjMyY4vX6lInnnid17qJYY3Bys37S6mueSZPFcLKilI8arfe3e3FaxG3b0WkyqEq7OMAzDCxTWxGbBg" 
+                alt="Reel Preview"
+                referrerPolicy="no-referrer"
+              />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-20 h-20 bg-primary/20 backdrop-blur-md border border-primary/50 rounded-full flex items-center justify-center cursor-pointer hover:scale-110 transition-transform">
+                  <Play className="w-10 h-10 text-primary fill-current" />
+                </div>
+              </div>
+              
+              <div className="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black to-transparent">
+                <div className="w-full h-1 bg-surface-highest rounded-full mb-4 relative">
+                  <div className="absolute top-0 left-0 h-full w-[45%] bg-secondary"></div>
+                  <div className="absolute top-1/2 left-[45%] -translate-y-1/2 w-4 h-4 bg-secondary rounded-full shadow-[0_0_10px_#00e3fd]"></div>
+                </div>
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center gap-6">
+                    <span className="text-white cursor-pointer hover:text-primary transition-colors">
+                      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+                    </span>
+                    <span className="text-white cursor-pointer hover:text-primary transition-colors">
+                      <Play className="w-8 h-8 fill-current" />
+                    </span>
+                    <span className="text-white cursor-pointer hover:text-primary transition-colors">
+                      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6zm9-12v12h2V6z"/></svg>
+                    </span>
+                    <span className="font-body text-xs text-on-surface-variant font-bold">02:45 / 05:00</span>
+                  </div>
+                  <div className="flex items-center gap-4 text-on-surface-variant">
+                    <svg className="w-6 h-6 cursor-pointer hover:text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+                    <svg className="w-6 h-6 cursor-pointer hover:text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+                    <svg className="w-6 h-6 cursor-pointer hover:text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-32 bg-background relative overflow-hidden">
+        <div className="absolute -left-20 top-0 w-96 h-96 bg-primary/10 blur-[120px] rounded-full"></div>
+        <div className="max-w-[1400px] mx-auto px-8 text-center relative z-10">
+          <h2 className="font-headline text-5xl md:text-7xl font-black mb-8 tracking-tighter uppercase italic">Ready to <span className="text-secondary">Stand Out?</span></h2>
+          <p className="font-body text-xl text-on-surface-variant max-w-2xl mx-auto mb-12">
+            Whether you need a cinematic brand film, motion graphics, or a full video campaign — let's build something people can't ignore.
+          </p>
+          <div className="flex flex-col md:flex-row gap-4 justify-center">
+            <Link to="/contact" className="bg-primary text-black px-12 py-5 rounded-sm font-black uppercase tracking-widest text-sm hover:shadow-[0_0_30px_#b89fff] transition-all">Start a Project</Link>
+            <button className="border border-outline-variant/30 px-12 py-5 rounded-sm font-black uppercase tracking-widest text-sm hover:bg-white/5 transition-colors">Download Resume</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
