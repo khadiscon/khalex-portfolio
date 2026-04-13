@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
-import { Play, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import CloudinaryVideo from '../components/CloudinaryVideo';
 
 export default function Home() {
   return (
@@ -134,45 +135,13 @@ export default function Home() {
       <section className="py-24 bg-surface-low">
         <div className="max-w-[1400px] mx-auto px-8">
           <div className="bg-surface-highest p-4 rounded-xl shadow-2xl overflow-hidden">
-            <div className="relative aspect-video bg-black rounded-lg group overflow-hidden">
-              <img 
-                className="w-full h-full object-cover opacity-60" 
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBITP-ztydYC29DzG75APrU8RkqQNKyrAdFpdRhbibUSMmjBv7P6KQJfj-_B8EdfRaEgfokTWhZqvd14iNrmcGHgQQadcJDCJd6nhimROOIsliXmFlcVezb09mVqKVKoj9vn_8QlorI21rkbywZsuV222y0AJL-PMi00NPMFiGP5hfbfLcy2hzJdCVf_m9PrjMyY4vX6lInnnid17qJYY3Bys37S6mueSZPFcLKilI8arfe3e3FaxG3b0WkyqEq7OMAzDCxTWxGbBg" 
-                alt="Reel Preview"
-                referrerPolicy="no-referrer"
-              />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-20 h-20 bg-primary/20 backdrop-blur-md border border-primary/50 rounded-full flex items-center justify-center cursor-pointer hover:scale-110 transition-transform">
-                  <Play className="w-10 h-10 text-primary fill-current" />
-                </div>
-              </div>
-              
-              <div className="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black to-transparent">
-                <div className="w-full h-1 bg-surface-highest rounded-full mb-4 relative">
-                  <div className="absolute top-0 left-0 h-full w-[45%] bg-secondary"></div>
-                  <div className="absolute top-1/2 left-[45%] -translate-y-1/2 w-4 h-4 bg-secondary rounded-full shadow-[0_0_10px_#00e3fd]"></div>
-                </div>
-                <div className="flex justify-between items-center">
-                  <div className="flex items-center gap-6">
-                    <span className="text-white cursor-pointer hover:text-primary transition-colors">
-                      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
-                    </span>
-                    <span className="text-white cursor-pointer hover:text-primary transition-colors">
-                      <Play className="w-8 h-8 fill-current" />
-                    </span>
-                    <span className="text-white cursor-pointer hover:text-primary transition-colors">
-                      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6zm9-12v12h2V6z"/></svg>
-                    </span>
-                    <span className="font-body text-xs text-on-surface-variant font-bold">02:45 / 05:00</span>
-                  </div>
-                  <div className="flex items-center gap-4 text-on-surface-variant">
-                    <svg className="w-6 h-6 cursor-pointer hover:text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
-                    <svg className="w-6 h-6 cursor-pointer hover:text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
-                    <svg className="w-6 h-6 cursor-pointer hover:text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <CloudinaryVideo
+              src="https://res.cloudinary.com/dqbzoeysr/video/upload/4_5996771426168741059_zbkrqy.mp4"
+              title="Showreel 2025"
+              autoPlay
+              loop
+              className="aspect-video rounded-lg"
+            />
           </div>
         </div>
       </section>
