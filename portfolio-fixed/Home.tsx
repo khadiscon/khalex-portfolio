@@ -144,7 +144,7 @@ export default function Home() {
               src="https://res.cloudinary.com/dqbzoeysr/video/upload/4_5996771426168741059_zbkrqy.mp4"
               title="Showreel 2025"
               loop
-              className="aspect-video rounded-lg w-full"
+              className="aspect-square rounded-lg w-full"
             />
           </div>
         </div>
