@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Play } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import CloudinaryVideo from '../components/CloudinaryVideo';
 
@@ -10,17 +10,17 @@ export default function Home() {
       <section className="relative h-screen w-full overflow-hidden flex items-end pb-24">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-black/40 z-10"></div>
-          <img 
-            className="w-full h-full object-cover" 
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwX6lPeUsaP66Zt02sw9P8DXqW9NgCoQlwY50cpYGSXwcQAd9bw2cbY7p14c8gmZNPD4oQaTwOLvLutixxA3WzC01YGkBRBbO13-21cvK_oGdvwc6sSgIkJfkmBFk0TN6LCfiCQ0rrIRlqj9PpoNXh_BfXZaBAb7w0QaJUCnhYDCjO4XTYkRCD8qGFMzS32AMo1m0tTFzMN56gjiss-o6oBRwBOCyzXAO-FdqKV5IdnmJcL52qwDlyghOqMrjnL5L7rSVz33y9gws" 
+          <img
+            className="w-full h-full object-cover"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwX6lPeUsaP66Zt02sw9P8DXqW9NgCoQlwY50cpYGSXwcQAd9bw2cbY7p14c8gmZNPD4oQaTwOLvLutixxA3WzC01YGkBRBbO13-21cvK_oGdvwc6sSgIkJfkmBFk0TN6LCfiCQ0rrIRlqj9PpoNXh_BfXZaBAb7w0QaJUCnhYDCjO4XTYkRCD8qGFMzS32AMo1m0tTFzMN56gjiss-o6oBRwBOCyzXAO-FdqKV5IdnmJcL52qwDlyghOqMrjnL5L7rSVz33y9gws"
             alt="Cinematic motion graphics workspace"
             referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 cinematic-gradient z-20"></div>
         </div>
-        
+
         <div className="relative z-30 px-8 md:pl-28 w-full max-w-7xl">
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
@@ -28,16 +28,16 @@ export default function Home() {
           >
             Showreel 2025
           </motion.p>
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
             className="font-headline text-6xl md:text-8xl font-black tracking-tighter leading-[0.9] mb-8 max-w-4xl"
           >
-            Crafting <span className="text-primary">Motion.</span><br/>Building Worlds.
+            Crafting <span className="text-primary">Motion.</span><br />Building Worlds.
           </motion.h1>
-          
-          <motion.div 
+
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
@@ -66,13 +66,13 @@ export default function Home() {
               A curated selection of motion work and visual stories built for brands, creators, and campaigns that demand attention.
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
             {/* Main Feature */}
             <Link to="/projects/neon-fragments" className="md:col-span-8 group relative overflow-hidden rounded-md bg-surface-low aspect-video">
-              <img 
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-emaU8krLKDNQY22di4ALZXJSVJONsmj_xXSIEjuoZlod7hRZr_hLy9GCS4o6yfFV9oAes4Pwhp0DUjS1SwMXnDrAwXZDvRq6v_I8SXE2snotIjnCnC4kHs6GYCCdzEmjQ5v5zbompuljKH_DRkIzMvOK3qC2KoGlTIk3jz11vF3LBDT5BsACaWYV10d4iU3ws2nhdWa26OxTdCerKn6uENp-AFB0jK0WbjyCWdb-gy8IkveMBHgR77H1ySlObvxCJ8LyPQLqQwg" 
+              <img
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-emaU8krLKDNQY22di4ALZXJSVJONsmj_xXSIEjuoZlod7hRZr_hLy9GCS4o6yfFV9oAes4Pwhp0DUjS1SwMXnDrAwXZDvRq6v_I8SXE2snotIjnCnC4kHs6GYCCdzEmjQ5v5zbompuljKH_DRkIzMvOK3qC2KoGlTIk3jz11vF3LBDT5BsACaWYV10d4iU3ws2nhdWa26OxTdCerKn6uENp-AFB0jK0WbjyCWdb-gy8IkveMBHgR77H1ySlObvxCJ8LyPQLqQwg"
                 alt="Neon Fluidity"
                 referrerPolicy="no-referrer"
               />
@@ -90,7 +90,7 @@ export default function Home() {
             <div className="md:col-span-4 flex flex-col gap-6">
               <div className="bg-surface-high p-8 flex-1 rounded-md border-l-2 border-primary/30">
                 <div className="text-primary mb-4">
-                  <motion.div animate={{ rotate: 360 }} transition={{ duration: 20, repeat: Infinity, ease: "linear" }}>
+                  <motion.div animate={{ rotate: 360 }} transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}>
                     <svg className="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M12 2v20M2 12h20" />
                     </svg>
@@ -112,13 +112,13 @@ export default function Home() {
             {/* Small Tiles */}
             {[
               { title: 'FUI DESIGN', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBUPVSwyLRqSxbldYBaE02SKja_SY0zwcAphw9PIIT7DUo1XXOEc9zMfznkqC3GAl6CoUQIOus--ew1E9bUqXbcwfPGTiVgpCRYug1NXKONlD_-7yGQIbNJAiwFeV1rMMk_cUifna25ZH3VHtFQfILVCJR5ORvltfaVIORcSxHYKs5sgBJqtfK9sBG2Wg4qPi7xzXGMkFJUBDsb91vJvJjN9_E4FizDFtDXPMujOcNs3weq4HSf7ztj7a7vzMohY26frYCptZfHusA' },
-              { title: 'GLITCH FX', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAL-BR8Hw-hVj11J7fkRcUxCB_92m725uTMb6Mk-uVeDekTs7ic_lYeBHDPIt0yA19OlVyrBH-ju9eX0IysiCxVwJLwga5IFEY21OzrGNM-EYY12BbzyekKGmMdk4cBRDyUZHxLNWlwZSxiVQHKRRaH2tLtYXXhIbcgN6CRRPPV-xYXZUn2wO7y4SCwNGRtdpJW8Dh4XHojPpGUQh45Ow4mwMUrkNbBba7U6Gob9rPPEY8yBL9Ziohmw4AmY2rSTYV9qpJ09hslo8Q' },
+              { title: 'GLITCH FX', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAL-BR8Hw-hVj11J7fkRcUxCB_92m725uTMb6Mk-uVeDekTs7ix_lYeBHDPIt0yA19OlVyrBH-ju9eX0IysiCxVwJLwga5IFEY21OzrGNM-EYY12BbzyekKGmMdk4cBRDyUZHxLNWlwZSxiVQHKRRaH2tLtYXXhIbcgN6CRRPPV-xYXZUn2wO7y4SCwNGRtdpJW8Dh4XHojPpGUQh45Ow4mwMUrkNbBba7U6Gob9rPPEY8yBL9Ziohmw4AmY2rSTYV9qpJ09hslo8Q' },
               { title: 'MINIMAL MOTION', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAspBMvPGId9VvcHVPsIu-SSo5NtGlUvfNJdSNdEt3wS8qTLBEDgzErId5qWMRknNX0cq4EReJ6C8qugBhh5sfn-uGMUGOxAacYDz9cVS6Ex3uizqZAvtR5bOb4PzkGRcpf1JBq6LukLkxvraeJnUN4SiLNf4iEbUg9HZiN9m2mv6yK7pQ6en-TQ1fphTLzyOrc_gxwd7O1ery-sRJrIhfW-72k4QWKfjp0V3WA0RR6j_t90snVwpZpw5dXkTnIFA4BwflYIjoMCyE' }
             ].map((tile) => (
               <div key={tile.title} className="md:col-span-4 group relative overflow-hidden rounded-md bg-surface-low aspect-square">
-                <img 
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
-                  src={tile.img} 
+                <img
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  src={tile.img}
                   alt={tile.title}
                   referrerPolicy="no-referrer"
                 />
@@ -131,16 +131,20 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Reel Section */}
+      {/* ── SHOWREEL SECTION ── */}
       <section className="py-24 bg-surface-low">
         <div className="max-w-[1400px] mx-auto px-8">
+          <div className="mb-10 flex items-baseline gap-6">
+            <h2 className="font-headline text-4xl font-black tracking-tight uppercase">Showreel <span className="text-primary">2025</span></h2>
+            <span className="text-on-surface-variant text-sm font-headline uppercase tracking-widest">Full Cut</span>
+          </div>
+          {/* ── REPLACE src WITH YOUR CLOUDINARY SHOWREEL URL ── */}
           <div className="bg-surface-highest p-4 rounded-xl shadow-2xl overflow-hidden">
             <CloudinaryVideo
               src="https://res.cloudinary.com/dqbzoeysr/video/upload/4_5996771426168741059_zbkrqy.mp4"
               title="Showreel 2025"
-              autoPlay
               loop
-              className="aspect-video rounded-lg"
+              className="aspect-video rounded-lg w-full"
             />
           </div>
         </div>
@@ -150,7 +154,9 @@ export default function Home() {
       <section className="py-32 bg-background relative overflow-hidden">
         <div className="absolute -left-20 top-0 w-96 h-96 bg-primary/10 blur-[120px] rounded-full"></div>
         <div className="max-w-[1400px] mx-auto px-8 text-center relative z-10">
-          <h2 className="font-headline text-5xl md:text-7xl font-black mb-8 tracking-tighter uppercase italic">Ready to <span className="text-secondary">Stand Out?</span></h2>
+          <h2 className="font-headline text-5xl md:text-7xl font-black mb-8 tracking-tighter uppercase italic">
+            Ready to <span className="text-secondary">Stand Out?</span>
+          </h2>
           <p className="font-body text-xl text-on-surface-variant max-w-2xl mx-auto mb-12">
             Whether you need a cinematic brand film, motion graphics, or a full video campaign — let's build something people can't ignore.
           </p>

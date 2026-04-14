@@ -18,7 +18,7 @@ app.post('/api/contact', async (req, res) => {
 
   try {
     await resend.emails.send({
-      from: 'Portfolio Contact <onboarding@resend.dev>',
+      from: 'Portfolio Contact <onboarding@resend.dev>', // TODO: replace with your verified domain e.g. 'noreply@yourdomain.com' — onboarding@resend.dev only works in Resend sandbox
       to: 'khadisconkhadiscon@gmail.com',
       replyTo: from_email,
       subject: `New Project Inquiry: ${project_type || 'General'}`,
