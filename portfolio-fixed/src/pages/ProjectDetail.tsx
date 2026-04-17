@@ -40,7 +40,7 @@ const allProjects: Record<string, {
     year: '2024',
     role: 'Creative Director / Motion Designer',
     tools: ['After Effects', 'Premiere Pro', 'Photoshop'],
-    heroImg: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBndl8J6tzbCZKz_8v9nPOoNkLKLeuLZdwbG7bGNfjdISmzTsxy9SzHGpyqpPSwF28rXenPs951C3jSXtjnGB6ySOSIleJRaE0GgUPY6qF5Ci5-IyNwNg6gsc-DVaBQHYUa54IFHrK-AqFrINZk9MSmsPVPoCqxfNcEpHPXQdoJcj7_lOQfJilp22ZB7NhfbwozDCM9GcPB7ctFd1gjUB34GrjkIoVtfwfjiHdI7JVomnlaqWQM5CEiMYBtS_4MehRE_RqZ6E6qTxg',
+    heroImg: '/assets/projects/cyberpunk-neon-noir.png',
     videoUrl: undefined,
     challenge: 'A high-stakes commercial project demanding a dark, neon-drenched visual identity. The challenge was to balance cinematic tension with brand clarity, producing a piece that felt both visceral and polished.',
     process: [
@@ -58,7 +58,7 @@ const allProjects: Record<string, {
     year: '2024',
     role: 'Motion Designer / Creative Lead',
     tools: ['After Effects', 'Cinema 4D', 'Illustrator'],
-    heroImg: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD7OpRb1bi4w4uDLKdIMwo3u_KC2MUbFRgsWfxJEQ6_wlH8C4hJxsR0QGc2h-Niuy6DShyQxc-KdA0JWSPNtwrDF5ifFDT62RCImk82LSo6uXQoQwfcBccEfwUFnv6jOBuhG4D_9mF86xtQi0Wakist8VoYqVsqLUS7Wu1puL9Ja12KwNWQF-GQRa9KczwoOe0nyOyYa-bZFF880BFFEqsPFQxSOq4Fwvk8mURrzoTvLfiEt0agshZENh6aftTyOhK1Q5yMPLHjAl4',
+    heroImg: '/assets/projects/glitch-protocol.png',
     videoUrl: undefined,
     challenge: 'Create a glitch-art motion system that felt controlled and intentional, not chaotic. Every distortion had to serve the narrative rhythm rather than distract from it.',
     process: [
@@ -76,7 +76,7 @@ const allProjects: Record<string, {
     year: '2023',
     role: 'Director / Editor',
     tools: ['Premiere Pro', 'DaVinci Resolve', 'After Effects'],
-    heroImg: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDFT-Rpvn62wPkETLJY0Tvz7flZHk213m-arbqEnJZtwIkAl6CTatUEINCGqgRsrSICi0bb2tnMwCBXCiUn1pei2RzRT7k0TDQTj4DR1BoAp_TalBBz9NwsExbI0Q8GsSbRAkdjPAMQwHo-k19t32p1_Vty7kxixZUs90IIyMr9WcoZDKZqpLeGMqsq4MqRmH0x2s4aQpSKfS2dg5jI_bLlavd0u4HATe9FZxGMU659gYkUSuT4SHi2sv-3D9Op0NlYrn94QVanczM',
+    heroImg: '/assets/projects/silent-echoes.png',
     videoUrl: undefined,
     challenge: 'A dialogue-free short film relying entirely on visual rhythm and sound design to carry an emotional arc. Every edit had to speak louder than words.',
     process: [
@@ -94,7 +94,7 @@ const allProjects: Record<string, {
     year: '2026',
     role: 'Lead Editor / Colorist',
     tools: ['Premiere Pro', 'DaVinci Resolve', 'After Effects'],
-    heroImg: 'https://lh3.googleusercontent.com/aida-public/AB6AXuABiz9NcrZXgg9QxhYO1ULDm-otBUviDw13sPM9-VPqMvoC0Dea93lk6KW8TBKtaC9Ysi2yuNP20jniqhChReIodFgU60ak6pMryH-ZbXd5RDYQiUg4PGGdpXpXwCszxxZATv-BYaLQYwC1GcEz1BOF4c7CVxKzzvNGReRqKx1aTFXFqAQxkgndg5y-CJD4razxFWV_Ha1lXzaEAnrrrh3BwHFXRT1zMs4ILYqPE9vrwx87dL_IFkTHc89xc-2VijmGAIcOshzWck0',
+    heroImg: '/assets/projects/april-reel-2026.png',
     videoUrl: 'https://res.cloudinary.com/dqbzoeysr/video/upload/3_April_2026_2_wanekk.mp4',
     challenge: 'A fast-turnaround commercial reel capturing the best motion work of April 2026 — pure energy, precision cuts, and cinematic visual language.',
     process: [
@@ -112,7 +112,7 @@ const allProjects: Record<string, {
     year: '2023',
     role: 'Solo Creative / Motion Designer',
     tools: ['Cinema 4D', 'Octane', 'After Effects'],
-    heroImg: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAiQD-CMHSBgRr8Ca_Q-ZG98zs5y0pz0a3kHPuNkA1sKRoeYJZEGyeWvm0z7mtgWYkVzH6-sv_KLtmyQxHavx4zSEk1lRq0rXeAN8R4uU5O5rEk63Wq6_sjqqHq1vzLr3B02UZK7ga9n50hlqT7xqGaz2H8hcJ1Nueru3EsFnzLJsjKUz0GynpV3cUwDyMuie-eoweQ7R7x0vRPpYCNA_OC5Q1xWWxXwd7OwQUf_SxT2kKuLAM1bEHMZERl9TPEihZbrzGOWSwUyJw',
+    heroImg: '/assets/projects/liquid-flow-v02.png',
     videoUrl: undefined,
     challenge: 'An exploratory personal project studying fluid simulation at the intersection of organic motion and geometric precision. No brief, no deadline — pure craft.',
     process: [
@@ -130,7 +130,7 @@ const allProjects: Record<string, {
     year: '2022',
     role: 'Director / Editor / Colorist',
     tools: ['Premiere Pro', 'After Effects', 'Audition'],
-    heroImg: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBMFnoyNTN8YiOk2ikgUxxu8TPUP-hmPFQm9enKNKy8aJFgAw5Hz3kJWZ4U2qIpTT1PUX-VahAMACy0W6ncFFiUkePnUpBZcgyTui98kdrqHNSswPevlCYu66NiVV1xhqV4Rh6toYm_JV2M8JxV1kGFzcHTlgcYmMahiGrDtkpLt0JtfIcHwM4tMps9LeUF3_XTxV64gPkK3UmrZBJMbM-HVZX2qlZqZtC1RvkI4S-ako8fGlA1WsnuFoVMG6qj4YOW6d-lsJNoXdw',
+    heroImg: '/assets/projects/analog-archive.png',
     videoUrl: undefined,
     challenge: 'Preserving the texture and warmth of analogue film while assembling a feature-length documentary from archival footage spanning five decades.',
     process: [

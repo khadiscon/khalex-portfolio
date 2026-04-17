@@ -55,7 +55,7 @@ export default function About() {
                   Download Resume
                 </button>
                 <a
-                  href="/"
+                  href="/#showreel"
                   className="inline-flex items-center gap-3 border border-outline-variant/30 px-8 py-4 rounded-sm font-headline font-bold uppercase tracking-widest text-sm hover:border-secondary hover:text-secondary transition-all"
                 >
                   <Play className="w-5 h-5" />

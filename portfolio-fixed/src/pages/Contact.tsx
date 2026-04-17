@@ -134,7 +134,7 @@ export default function Contact() {
           <div className="hidden lg:block pt-12">
             <div className="w-full aspect-video bg-surface-low rounded-md overflow-hidden relative group">
               <img
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIfO5MF-f4TQSrTfVkuqTJ0_T5rZXjVhsaFXLQ-MALYBqCfzHyfxLk0n-pxyQQNBQ5pPO4zmR7evSs8meAELROZPh66Z6rA9JqOST1Sb5CEZj2cnotd6UzMdsR8iyVhLrrzsO9HBEylpjUPx0-2LvO5M5hIr_H3dbJ8QrXc_znFeGMF0mgXfHz3XsPQOLslNzDRiWH_d1Wj7euUy1DZ6yF2_POpM4vR2JWrSHMHyuDzI7M1PpIu62bx8UBBkX8MRNUYW1uvS90T5Q"
+                src="/assets/projects/contact-side.png"
                 alt="Contact visuals"
                 className="w-full h-full object-cover opacity-40 grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
                 referrerPolicy="no-referrer"

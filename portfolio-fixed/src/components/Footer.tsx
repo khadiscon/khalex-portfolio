@@ -2,11 +2,11 @@ import { Link } from 'react-router-dom';
 
 function AvatarPlaceholder() {
   return (
-    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-      <rect width="32" height="32" fill="#1f1f21"/>
-      <circle cx="16" cy="13" r="5.5" fill="#b89fff" opacity="0.8"/>
-      <ellipse cx="16" cy="27" rx="9" ry="6" fill="#b89fff" opacity="0.5"/>
-    </svg>
+    <img
+      src="/assets/pfp.png"
+      alt="Khalex"
+      className="w-full h-full object-cover object-top"
+    />
   );
 }
 
@@ -70,7 +70,7 @@ export default function Footer() {
         </div>
 
         <div className="font-body text-xs uppercase tracking-widest text-neutral-500 text-center md:text-right">
-          © 2025 Khalex. All rights reserved.
+          © 2026 Khalex. All rights reserved.
         </div>
       </div>
     </footer>
