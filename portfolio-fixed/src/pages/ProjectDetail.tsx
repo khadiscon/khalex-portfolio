@@ -232,6 +232,8 @@ export default function ProjectDetail() {
                   src={project.videoUrl}
                   poster={project.heroImg}
                   title={project.title}
+                  autoPlay
+                  loop
                   className="w-full h-full"
                 />
               ) : (

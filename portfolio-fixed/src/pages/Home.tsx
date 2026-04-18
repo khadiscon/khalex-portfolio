@@ -147,8 +147,9 @@ export default function Home() {
             <CloudinaryVideo
               src="https://res.cloudinary.com/dqbzoeysr/video/upload/17_April_2026_1_midrie.mp4"
               title="Showreel 2025"
+              autoPlay
               loop
-              className="aspect-square rounded-lg w-full"
+              className="aspect-[4/3] rounded-lg w-full"
             />
           </div>
         </div>

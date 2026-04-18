@@ -126,6 +126,8 @@ export default function Projects() {
                 src={project.videoUrl}
                 poster={project.img}
                 title={project.title}
+                autoPlay
+                loop
                 className="w-full h-full"
               />
               {/* Title overlay — sits above video but below controls */}
