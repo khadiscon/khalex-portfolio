@@ -148,7 +148,9 @@ export default function Home() {
               src="https://res.cloudinary.com/dqbzoeysr/video/upload/4_5996771426168741059_zbkrqy.mp4"
               title="Showreel 2025"
               loop
-              className="aspect-square rounded-lg w-full"
+              autoPlay
+              naturalAspect
+              className="rounded-lg w-full"
             />
           </div>
         </div>
@@ -166,7 +168,7 @@ export default function Home() {
           </p>
           <div className="flex flex-col md:flex-row gap-4 justify-center">
             <Link to="/contact" className="bg-primary text-black px-12 py-5 rounded-sm font-black uppercase tracking-widest text-sm hover:shadow-[0_0_30px_#b89fff] transition-all">Start a Project</Link>
-            <button className="border border-outline-variant/30 px-12 py-5 rounded-sm font-black uppercase tracking-widest text-sm hover:bg-white/5 transition-colors">Download Resume</button>
+
           </div>
         </div>
       </section>

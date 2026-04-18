@@ -45,7 +45,7 @@ const projects = [
     title: 'APRIL REEL 2026',
     category: 'Commercials',
     img: '/assets/projects/april-reel-2026.png',
-    videoUrl: 'https://res.cloudinary.com/dqbzoeysr/video/upload/3_April_2026_2_wanekk.mp4' as string | undefined,
+    videoUrl: 'https://res.cloudinary.com/dqbzoeysr/video/upload/17_April_2026_1_midrie.mp4' as string | undefined,
     span: 'md:col-span-8',
     aspect: 'aspect-[16/9]',
   },
@@ -126,6 +126,8 @@ export default function Projects() {
                 src={project.videoUrl}
                 poster={project.img}
                 title={project.title}
+                autoPlay
+                loop
                 className="w-full h-full"
               />
               {/* Title overlay — sits above video but below controls */}
