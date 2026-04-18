@@ -44,7 +44,7 @@ const projects = [
     id: 'april-reel-2026',
     title: 'APRIL REEL 2026',
     category: 'Commercials',
-    img: '/assets/projects/april-reel-2026.png',
+    img: undefined,
     videoUrl: 'https://res.cloudinary.com/dqbzoeysr/video/upload/3_April_2026_2_wanekk.mp4' as string | undefined,
     span: 'md:col-span-8',
     aspect: 'aspect-[16/9]',
