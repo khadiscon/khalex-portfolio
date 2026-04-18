@@ -8,8 +8,6 @@ interface CloudinaryVideoProps {
   autoPlay?: boolean;
   loop?: boolean;
   title?: string;
-  /** When true, detects the video's real dimensions and auto-sizes the container to match */
-  naturalAspect?: boolean;
 }
 
 export default function CloudinaryVideo({
@@ -19,7 +17,6 @@ export default function CloudinaryVideo({
   autoPlay = false,
   loop = false,
   title,
-  naturalAspect = false,
 }: CloudinaryVideoProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -28,7 +25,6 @@ export default function CloudinaryVideo({
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
   const [showControls, setShowControls] = useState(false);
-  const [intrinsicRatio, setIntrinsicRatio] = useState<string | undefined>(undefined);
   const hideTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Pause when scrolled out of view
@@ -46,13 +42,6 @@ export default function CloudinaryVideo({
     );
     observer.observe(el);
     return () => observer.disconnect();
-  }, []);
-
-  // Cleanup hide timeout on unmount
-  useEffect(() => {
-    return () => {
-      if (hideTimeout.current) clearTimeout(hideTimeout.current);
-    };
   }, []);
 
   const togglePlay = () => {
@@ -97,7 +86,6 @@ export default function CloudinaryVideo({
     <div
       ref={containerRef}
       className={`relative overflow-hidden bg-black cursor-pointer select-none ${className}`}
-      style={naturalAspect && intrinsicRatio ? { aspectRatio: intrinsicRatio } : undefined}
       onClick={togglePlay}
       onMouseMove={revealControls}
       onMouseLeave={() => { if (hideTimeout.current) clearTimeout(hideTimeout.current); setShowControls(false); }}
@@ -111,18 +99,12 @@ export default function CloudinaryVideo({
         muted={autoPlay}
         playsInline
         preload="metadata"
-        className={`w-full ${naturalAspect ? 'h-auto' : 'h-full object-cover'}`}
+        className="w-full h-full object-cover"
         onTimeUpdate={(e) => {
           const v = e.target as HTMLVideoElement;
           if (v.duration) setProgress((v.currentTime / v.duration) * 100);
         }}
-        onLoadedMetadata={(e) => {
-          const v = e.target as HTMLVideoElement;
-          setDuration(v.duration);
-          if (naturalAspect && v.videoWidth && v.videoHeight) {
-            setIntrinsicRatio(`${v.videoWidth} / ${v.videoHeight}`);
-          }
-        }}
+        onLoadedMetadata={(e) => setDuration((e.target as HTMLVideoElement).duration)}
         onPlay={() => setPlaying(true)}
         onPause={() => setPlaying(false)}
         onEnded={() => setPlaying(false)}

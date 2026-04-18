@@ -95,7 +95,7 @@ const allProjects: Record<string, {
     role: 'Lead Editor / Colorist',
     tools: ['Premiere Pro', 'DaVinci Resolve', 'After Effects'],
     heroImg: '/assets/projects/april-reel-2026.png',
-    videoUrl: 'https://res.cloudinary.com/dqbzoeysr/video/upload/17_April_2026_1_midrie.mp4',
+    videoUrl: 'https://res.cloudinary.com/dqbzoeysr/video/upload/3_April_2026_2_wanekk.mp4',
     challenge: 'A fast-turnaround commercial reel capturing the best motion work of April 2026 — pure energy, precision cuts, and cinematic visual language.',
     process: [
       { title: 'Cut', icon: Film, desc: 'Best-of selection edited to hit every beat of the track.' },
@@ -146,19 +146,7 @@ const allProjects: Record<string, {
 
 export default function ProjectDetail() {
   const { id } = useParams<{ id: string }>();
-  const project = id ? allProjects[id] : null;
-
-  if (!project) {
-    return (
-      <main className="flex flex-col items-center justify-center min-h-screen text-center px-8">
-        <h1 className="font-headline text-6xl font-black text-white mb-4">404</h1>
-        <p className="text-on-surface-variant text-lg mb-8">Project not found.</p>
-        <Link to="/projects" className="bg-primary text-black px-8 py-3 rounded-sm font-headline font-bold uppercase tracking-widest text-sm hover:shadow-[0_0_20px_#b89fff] transition-all">
-          Back to Projects
-        </Link>
-      </main>
-    );
-  }
+  const project = (id && allProjects[id]) ? allProjects[id] : allProjects['cyberpunk-neon-noir'];
 
   return (
     <main className="shutter-entrance">
@@ -244,8 +232,6 @@ export default function ProjectDetail() {
                   src={project.videoUrl}
                   poster={project.heroImg}
                   title={project.title}
-                  autoPlay
-                  loop
                   className="w-full h-full"
                 />
               ) : (
