@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Syne", sans-serif;
+  --font-mono:    "DM Mono", monospace;
+
+  /* Primary palette */
+  --color-ink:       #090909;
+  --color-paper:     #F0ECE4;
+  --color-hot:       #FF3D00;
+  --color-hot-dim:   #CC3100;
+
+  /* Surfaces */
+  --color-smoke:  #131313;
+  --color-steel:  #1c1c1c;
+  --color-iron:   #262626;
+  --color-chrome: #333333;
+
+  /* Text */
+  --color-ash:  #6e6e6e;
+  --color-fog:  #999999;
+  --color-wire: #2a2a2a;
+
+  /* Backward-compat aliases so CloudinaryVideo still works */
+  --color-primary:            #FF3D00;
+  --color-secondary:          #F0ECE4;
+  --color-background:         #090909;
+  --color-surface-low:        #131313;
+  --color-surface-high:       #1c1c1c;
+  --color-surface-highest:    #262626;
+  --color-on-surface-variant: #6e6e6e;
+  --color-outline-variant:    #2a2a2a;
+}
+
+@layer base {
+  body {
+    @apply bg-ink text-paper font-mono selection:bg-hot selection:text-ink;
+    font-feature-settings: "ss01";
+    -webkit-font-smoothing: antialiased;
+    cursor: none;
+  }
+  h1, h2, h3, h4, h5, h6 { @apply font-display; }
+}
+
+/* ── Custom cursor ───────────────────────────────────── */
+* { cursor: none !important; }
+
+#custom-cursor {
+  position: fixed;
+  top: 0; left: 0;
+  width: 10px; height: 10px;
+  background: #FF3D00;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease, background 0.2s ease, width 0.2s ease, height 0.2s ease;
+  mix-blend-mode: difference;
+}
+
+#custom-cursor.hovering {
+  width: 28px; height: 28px;
+  background: #FF3D00;
+}
+
+#cursor-ring {
+  position: fixed;
+  top: 0; left: 0;
+  width: 32px; height: 32px;
+  border: 1px solid rgba(255,61,0,0.4);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.18s ease, border-color 0.2s ease, width 0.2s ease, height 0.2s ease;
+}
+
+#cursor-ring.hovering {
+  width: 52px; height: 52px;
+  border-color: rgba(255,61,0,0.25);
+}
+
+/* ── Layout helpers ──────────────────────────────────── */
+.ruled-top    { border-top:    1px solid #2a2a2a; }
+.ruled-bottom { border-bottom: 1px solid #2a2a2a; }
+
+/* ── Page entrance ───────────────────────────────────── */
+.page-enter {
+  animation: page-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes page-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Marquee ─────────────────────────────────────────── */
+.marquee-track {
+  display: flex;
+  white-space: nowrap;
+  animation: marquee 28s linear infinite;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── Scroll indicator line ───────────────────────────── */
+.scroll-line {
+  animation: scroll-pulse 2s ease-in-out infinite;
+}
+@keyframes scroll-pulse {
+  0%, 100% { opacity: 0.15; transform: scaleY(1); }
+  50%       { opacity: 0.6;  transform: scaleY(1.15); }
+}
+
+/* ── Noise overlay texture ───────────────────────────── */
+.noise-overlay {
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  pointer-events: none;
+}
+
+/* ── Scanlines effect ────────────────────────────────── */
+.scanlines {
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.06) 2px,
+    rgba(0, 0, 0, 0.06) 4px
+  );
+}
+
+/* ── Scrollbar ───────────────────────────────────────── */
+::-webkit-scrollbar       { width: 3px; }
+::-webkit-scrollbar-track { background: #090909; }
+::-webkit-scrollbar-thumb { background: #2a2a2a; transition: background 0.2s; }
+::-webkit-scrollbar-thumb:hover { background: #FF3D00; }
+
+/* ── Reduced motion ──────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .page-enter, .scroll-line, .marquee-track { animation: none; }
+  * { transition-duration: 0.01ms !important; }
+}
