@@ -8,23 +8,23 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { from_name, from_email, project_type, message } = req.body;
+  const { name, email, budget, message } = req.body;
 
-  if (!from_name || !from_email || !message) {
+  if (!name || !email || !message) {
     return res.status(400).json({ error: 'Missing required fields' });
   }
 
   try {
     await resend.emails.send({
-      from: 'Portfolio Contact <onboarding@resend.dev>', // TODO: replace with your verified domain e.g. 'noreply@yourdomain.com' — onboarding@resend.dev only works in Resend sandbox
+      from: 'Portfolio Contact <onboarding@resend.dev>',
       to: 'khadisconkhadiscon@gmail.com',
-      replyTo: from_email,
-      subject: `New Project Inquiry: ${project_type || 'General'}`,
+      replyTo: email,
+      subject: `New Project Inquiry from ${name}`,
       html: `
         <h2>New message from your portfolio</h2>
-        <p><strong>Name:</strong> ${from_name}</p>
-        <p><strong>Email:</strong> ${from_email}</p>
-        <p><strong>Project Type:</strong> ${project_type || 'Not specified'}</p>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Budget:</strong> ${budget || 'Not specified'}</p>
         <p><strong>Message:</strong></p>
         <p>${message.replace(/\n/g, '<br/>')}</p>
       `,

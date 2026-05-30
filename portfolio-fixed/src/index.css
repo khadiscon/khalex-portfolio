@@ -1,49 +1,73 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-headline: "Space Grotesk", sans-serif;
-  --font-body: "Manrope", sans-serif;
-  
-  --color-primary: #b89fff;
-  --color-primary-dim: #834fff;
-  --color-secondary: #00e3fd;
-  --color-background: #0e0e0f;
-  --color-surface-low: #131314;
-  --color-surface-high: #1f1f21;
-  --color-surface-highest: #262627;
-  --color-on-surface-variant: #adaaab;
-  --color-outline-variant: #484849;
+  --font-display: "Syne", sans-serif;
+  --font-mono: "DM Mono", monospace;
+
+  /* Primary palette */
+  --color-ink:   #090909;
+  --color-paper: #F0ECE4;
+  --color-hot:   #FF3D00;
+  --color-hot-dim: #CC3100;
+
+  /* Surfaces */
+  --color-smoke:  #131313;
+  --color-steel:  #1c1c1c;
+  --color-iron:   #262626;
+  --color-chrome: #333333;
+
+  /* Text */
+  --color-ash:  #6e6e6e;
+  --color-fog:  #999999;
+  --color-wire: #2a2a2a;
+
+  /* Backward-compat aliases so CloudinaryVideo still works */
+  --color-primary:            #FF3D00;
+  --color-secondary:          #F0ECE4;
+  --color-background:         #090909;
+  --color-surface-low:        #131313;
+  --color-surface-high:       #1c1c1c;
+  --color-surface-highest:    #262626;
+  --color-on-surface-variant: #6e6e6e;
+  --color-outline-variant:    #2a2a2a;
 }
 
 @layer base {
   body {
-    @apply bg-background text-white font-body selection:bg-primary selection:text-black;
+    @apply bg-ink text-paper font-mono selection:bg-hot selection:text-ink;
+    font-feature-settings: "ss01";
+    -webkit-font-smoothing: antialiased;
   }
-  
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-headline;
-  }
+  h1, h2, h3, h4, h5, h6 { @apply font-display; }
 }
 
-.cinematic-gradient {
-  background: linear-gradient(to bottom, transparent 0%, rgba(14, 14, 15, 0.8) 70%, #0e0e0f 100%);
+/* ── layout helpers ── */
+.ruled-top    { border-top:    1px solid #2a2a2a; }
+.ruled-bottom { border-bottom: 1px solid #2a2a2a; }
+
+/* ── page entrance ── */
+.page-enter {
+  animation: page-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes page-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-.glass-nav {
-  background-color: rgba(10, 10, 11, 0.6);
-  backdrop-filter: blur(20px);
+/* ── marquee ── */
+.marquee-track {
+  display: flex;
+  white-space: nowrap;
+  animation: marquee 28s linear infinite;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
 
-.text-glow-primary {
-  text-shadow: 0 0 12px rgba(184, 159, 255, 0.4);
-}
-
-.shutter-entrance {
-  clip-path: inset(0 0 100% 0);
-  animation: shutter-open 0.6s cubic-bezier(0.85, 0, 0.15, 1) forwards;
-}
-
-@keyframes shutter-open {
-  to { clip-path: inset(0 0 0 0); }
-}
+/* ── scrollbar ── */
+::-webkit-scrollbar       { width: 3px; }
+::-webkit-scrollbar-track { background: #090909; }
+::-webkit-scrollbar-thumb { background: #2a2a2a; transition: background 0.2s; }
+::-webkit-scrollbar-thumb:hover { background: #FF3D00; }

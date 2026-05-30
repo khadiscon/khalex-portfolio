@@ -1,21 +1,13 @@
 import { motion } from 'motion/react';
-import { Play, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import CloudinaryVideo from '../components/CloudinaryVideo';
-
-// ─────────────────────────────────────────────────────────────────
-// HOW TO ADD YOUR CLOUDINARY VIDEOS
-// Set videoUrl on any project to play it inline on the card.
-// Format: 'https://res.cloudinary.com/YOUR_CLOUD_NAME/video/upload/YOUR_PUBLIC_ID.mp4'
-// The img field is used as the poster/thumbnail.
-// Leave videoUrl as undefined to keep it as an image card.
-// ─────────────────────────────────────────────────────────────────
 
 const projects = [
   {
     id: 'cyberpunk-neon-noir',
-    title: 'CYBERPUNK NEON NOIR',
+    num: '001',
+    title: 'Cyberpunk Neon Noir',
     category: 'Commercials',
     img: '/assets/projects/cyberpunk-neon-noir.png',
     videoUrl: undefined as string | undefined,
@@ -24,7 +16,8 @@ const projects = [
   },
   {
     id: 'glitch-protocol',
-    title: 'GLITCH PROTOCOL',
+    num: '002',
+    title: 'Glitch Protocol',
     category: 'Motion Graphics',
     img: '/assets/projects/glitch-protocol.png',
     videoUrl: undefined as string | undefined,
@@ -33,7 +26,8 @@ const projects = [
   },
   {
     id: 'silent-echoes',
-    title: 'SILENT ECHOES',
+    num: '003',
+    title: 'Silent Echoes',
     category: 'Short Films',
     img: '/assets/projects/silent-echoes.png',
     videoUrl: undefined as string | undefined,
@@ -42,7 +36,8 @@ const projects = [
   },
   {
     id: 'april-reel-2026',
-    title: 'APRIL REEL 2026',
+    num: '004',
+    title: 'April Reel 2026',
     category: 'Commercials',
     img: undefined,
     videoUrl: 'https://res.cloudinary.com/dqbzoeysr/video/upload/3_April_2026_2_wanekk.mp4' as string | undefined,
@@ -51,7 +46,8 @@ const projects = [
   },
   {
     id: 'liquid-flow-v02',
-    title: 'LIQUID FLOW V.02',
+    num: '005',
+    title: 'Liquid Flow V.02',
     category: 'Personal Projects',
     img: '/assets/projects/liquid-flow-v02.png',
     videoUrl: undefined as string | undefined,
@@ -60,7 +56,8 @@ const projects = [
   },
   {
     id: 'the-analog-archive',
-    title: 'THE ANALOG ARCHIVE',
+    num: '006',
+    title: 'The Analog Archive',
     category: 'Short Films',
     img: '/assets/projects/analog-archive.png',
     videoUrl: undefined as string | undefined,
@@ -69,119 +66,148 @@ const projects = [
   },
 ];
 
-const filters = ['All Work', 'Motion Graphics', 'Commercials', 'Short Films', 'Personal Projects'];
+const filters = ['All', 'Motion Graphics', 'Commercials', 'Short Films', 'Personal Projects'];
 
 export default function Projects() {
-  const [activeFilter, setActiveFilter] = useState('All Work');
+  const [active, setActive] = useState('All');
 
   const filtered =
-    activeFilter === 'All Work' ? projects : projects.filter((p) => p.category === activeFilter);
+    active === 'All' ? projects : projects.filter((p) => p.category === active);
 
   return (
-    <main className="pt-32 pb-20 px-8 lg:pl-28 lg:pr-16 shutter-entrance">
-      <header className="mb-16 max-w-4xl">
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="font-headline text-6xl md:text-8xl font-black tracking-tighter mb-8 leading-[0.9] text-white"
-        >
-          CURATED<br />
-          <span className="text-primary">FRAMEWORK</span>
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="text-on-surface-variant text-lg max-w-2xl mb-12"
-        >
-          Selected motion work, brand content, and visual projects — built to stop the scroll and move audiences.
-        </motion.p>
+    <main className="pt-28 pb-20 px-6 md:px-10 page-enter">
+      <div className="max-w-[1600px] mx-auto">
+        {/* Header */}
+        <header className="mb-14">
+          <div className="flex items-center gap-3 mb-4">
+            <span className="font-mono text-[10px] text-ash tracking-widest uppercase">Work</span>
+            <span className="w-5 h-px bg-wire" />
+            <span className="font-mono text-[10px] text-ash tracking-widest uppercase">
+              {filtered.length} project{filtered.length !== 1 ? 's' : ''}
+            </span>
+          </div>
 
-        <div className="flex flex-wrap gap-4 items-center">
-          {filters.map((filter) => (
-            <button
-              key={filter}
-              onClick={() => setActiveFilter(filter)}
-              className={`px-6 py-2 text-xs uppercase tracking-widest font-bold rounded-sm transition-all ${
-                activeFilter === filter
-                  ? 'bg-primary text-black'
-                  : 'border border-outline-variant/20 text-on-surface-variant hover:text-secondary hover:border-secondary'
-              }`}
-            >
-              {filter}
-            </button>
-          ))}
+          <motion.h1
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="font-display font-extrabold uppercase tracking-tighter leading-[0.82] text-paper mb-6"
+            style={{ fontSize: 'clamp(3.5rem, 9vw, 8rem)' }}
+          >
+            Curated<br />
+            <span className="text-hot">Framework</span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15, duration: 0.45 }}
+            className="font-mono text-[10px] text-ash max-w-md leading-relaxed mb-10"
+          >
+            Selected motion work, brand content, and visual projects built to stop the scroll and move audiences.
+          </motion.p>
+
+          {/* Filter tabs */}
+          <div className="ruled-top pt-5 flex flex-wrap gap-1">
+            {filters.map((f) => (
+              <button
+                key={f}
+                onClick={() => setActive(f)}
+                className={`px-4 py-2 font-mono text-[10px] uppercase tracking-widest transition-all duration-200 ${
+                  active === f
+                    ? 'bg-hot text-ink'
+                    : 'text-ash border border-wire hover:border-paper/30 hover:text-paper'
+                }`}
+              >
+                {f}
+              </button>
+            ))}
+          </div>
+        </header>
+
+        {/* Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-3">
+          {filtered.map((project) =>
+            project.videoUrl ? (
+              /* ── VIDEO CARD: same Link wrapper as image cards, native video as bg ── */
+              <Link
+                key={project.id}
+                to={`/projects/${project.id}`}
+                className={`${project.span} group relative overflow-hidden bg-smoke ${project.aspect} block`}
+              >
+                <video
+                  src={project.videoUrl}
+                  poster={project.img}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                />
+                {/* Dark overlay on hover — identical to image cards */}
+                <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                {/* Index number */}
+                <div className="absolute top-4 left-4 font-mono text-[10px] text-wire/70 tracking-widest">
+                  {project.num}
+                </div>
+                {/* Details: slide up on hover — identical to image cards */}
+                <div className="absolute bottom-0 left-0 right-0 px-5 pb-5 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+                  <span className="font-mono text-[10px] text-hot uppercase tracking-[0.3em] block mb-1">
+                    {project.category}
+                  </span>
+                  <h3 className="font-display font-bold text-xl md:text-2xl uppercase tracking-tight text-paper">
+                    {project.title}
+                  </h3>
+                </div>
+              </Link>
+            ) : (
+              /* ── IMAGE CARD ── */
+              <Link
+                key={project.id}
+                to={`/projects/${project.id}`}
+                className={`${project.span} group relative overflow-hidden bg-smoke ${project.aspect}`}
+              >
+                <img
+                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                  src={project.img}
+                  alt={project.title}
+                />
+                {/* Dark overlay on hover */}
+                <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                {/* Index number */}
+                <div className="absolute top-4 left-4 font-mono text-[10px] text-wire/70 tracking-widest">
+                  {project.num}
+                </div>
+                {/* Details: slide up on hover */}
+                <div className="absolute bottom-0 left-0 right-0 px-5 pb-5 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+                  <span className="font-mono text-[10px] text-hot uppercase tracking-[0.3em] block mb-1">
+                    {project.category}
+                  </span>
+                  <h3 className="font-display font-bold text-xl md:text-2xl uppercase tracking-tight text-paper">
+                    {project.title}
+                  </h3>
+                </div>
+              </Link>
+            )
+          )}
         </div>
-      </header>
 
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
-        {filtered.map((project) =>
-          project.videoUrl ? (
-            // ── VIDEO CARD — plays inline ──
-            <div
-              key={project.id}
-              className={`${project.span} group relative overflow-hidden rounded-md bg-surface-low ${project.aspect}`}
-            >
-              <CloudinaryVideo
-                src={project.videoUrl}
-                poster={project.img}
-                title={project.title}
-                autoPlay
-                loop
-                className="w-full h-full"
-              />
-              {/* Title overlay — sits above video but below controls */}
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent px-6 pb-6 pt-12 pointer-events-none">
-                <span className="text-secondary text-[10px] font-bold uppercase tracking-[0.3em] mb-1 block">
-                  {project.category}
-                </span>
-                <h3 className="font-headline text-xl md:text-2xl font-bold text-white tracking-tight">
-                  {project.title}
-                </h3>
-              </div>
-            </div>
-          ) : (
-            // ── IMAGE CARD — navigates to detail page ──
-            <Link
-              key={project.id}
-              to={`/projects/${project.id}`}
-              className={`${project.span} group relative overflow-hidden rounded-md bg-surface-low ${project.aspect}`}
-            >
-              <img
-                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                src={project.img}
-                alt={project.title}
-                referrerPolicy="no-referrer"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60" />
-              <div className="absolute bottom-6 left-6">
-                <span className="text-secondary text-[10px] font-bold uppercase tracking-[0.3em] mb-2 block">
-                  {project.category}
-                </span>
-                <h3 className="font-headline text-xl md:text-3xl font-bold text-white tracking-tight">
-                  {project.title}
-                </h3>
-              </div>
-              <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
-                <Play className="w-10 h-10 text-white fill-current" />
-              </div>
-            </Link>
-          )
+        {filtered.length === 0 && (
+          <div className="text-center py-32 font-mono text-[10px] text-ash uppercase tracking-widest">
+            No projects in this category yet.
+          </div>
         )}
-      </div>
 
-      {filtered.length === 0 && (
-        <div className="text-center py-32 text-on-surface-variant font-headline text-xl uppercase tracking-widest">
-          No projects in this category yet.
+        {/* Footer row */}
+        <div className="mt-14 ruled-top pt-6 flex justify-between items-center">
+          <span className="font-mono text-[10px] text-wire uppercase tracking-widest">
+            Showing {filtered.length} of {projects.length}
+          </span>
+          <button className="group flex items-center gap-3 font-mono text-[10px] text-ash hover:text-hot uppercase tracking-widest transition-colors">
+            More coming soon
+            <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+          </button>
         </div>
-      )}
-
-      <div className="mt-20 flex justify-center">
-        <button className="group flex items-center gap-4 text-on-surface-variant hover:text-white transition-colors">
-          <span className="text-xs uppercase tracking-[0.5em] font-bold">Discover More Works</span>
-          <span className="w-12 h-[1px] bg-outline-variant group-hover:bg-primary transition-all duration-300" />
-          <ArrowRight className="w-4 h-4" />
-        </button>
       </div>
     </main>
   );

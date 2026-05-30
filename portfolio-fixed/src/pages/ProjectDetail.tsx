@@ -1,310 +1,331 @@
+import { Link, useParams } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, Play, Zap, Box, Layers, Film, Cpu, Monitor, Clock } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Zap, Film, Box, Layers, Monitor, Play } from 'lucide-react';
 import CloudinaryVideo from '../components/CloudinaryVideo';
 
-function AvatarPlaceholder() {
-  return (
-    <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-      <rect width="64" height="64" fill="#1f1f21" />
-      <circle cx="32" cy="26" r="14" fill="#b89fff" opacity="0.8" />
-      <ellipse cx="32" cy="56" rx="20" ry="14" fill="#b89fff" opacity="0.5" />
-    </svg>
-  );
-}
-
-// ─────────────────────────────────────────────────────────────────
-// HOW TO ADD YOUR CLOUDINARY VIDEOS
-// Set videoUrl on any project. The "Visual Showcase" section will
-// replace the static image with a playable video player.
-// Format: 'https://res.cloudinary.com/YOUR_CLOUD_NAME/video/upload/YOUR_PUBLIC_ID.mp4'
-// ─────────────────────────────────────────────────────────────────
-
+// ── Project data ──────────────────────────────────────────────────────────────
 const allProjects: Record<string, {
-  title: string;
-  category: string;
-  year: string;
-  role: string;
-  tools: string[];
-  heroImg: string;
-  videoUrl?: string;
+  title: string; category: string; year: string; role: string; tools: string[];
+  heroImg?: string; images?: string[]; videoUrl?: string;
   challenge: string;
-  process: { title: string; icon: any; desc: string }[];
+  process: { title: string; icon: typeof Zap; desc: string }[];
   results: string;
-  nextId: string;
-  nextTitle: string;
+  nextId: string; nextTitle: string;
 }> = {
   'cyberpunk-neon-noir': {
-    title: 'CYBERPUNK NEON NOIR',
-    category: 'Featured / Commercial',
+    title: 'Cyberpunk Neon Noir',
+    category: 'Commercials',
     year: '2024',
-    role: 'Creative Director / Motion Designer',
-    tools: ['After Effects', 'Premiere Pro', 'Photoshop'],
+    role: 'Director / Motion Designer',
+    tools: ['After Effects', 'Cinema 4D', 'Octane Render', 'Premiere Pro'],
     heroImg: '/assets/projects/cyberpunk-neon-noir.png',
+    images: ['/assets/projects/cyberpunk-neon-noir.png'],
     videoUrl: undefined,
-    challenge: 'A high-stakes commercial project demanding a dark, neon-drenched visual identity. The challenge was to balance cinematic tension with brand clarity, producing a piece that felt both visceral and polished.',
+    challenge: 'Concept-to-final motion piece capturing a neon-drenched, high-contrast aesthetic built for a futuristic brand launch. Every frame needed to feel like a frame from a film — not a social post.',
     process: [
-      { title: 'Concept', icon: Zap, desc: 'Deep dive into cyberpunk aesthetics and neon color theory.' },
-      { title: 'Editing', icon: Film, desc: 'Precision cuts synced to custom sound design and score.' },
-      { title: 'Grade', icon: Monitor, desc: 'Signature cyan/magenta duotone color grading pipeline.' },
+      { title: 'Concept', icon: Box,     desc: 'Moodboard-driven direction pulling from cyberpunk cinema, brutalist typography, and neon photography.' },
+      { title: 'Build',   icon: Zap,     desc: 'Cinema 4D base geometry with Octane lighting — layered neon glow passes rendered in separate AOVs.' },
+      { title: 'Post',    icon: Layers,  desc: 'AE compositing with lens flares, chromatic aberration, film grain, and tempo-synced cuts.' },
     ],
-    results: "The spot exceeded delivery benchmarks and set a new aesthetic standard for the brand's motion library.",
+    results: 'Delivered in 3 days. Client extended scope to a full 3-piece motion campaign after viewing the first edit.',
     nextId: 'glitch-protocol',
-    nextTitle: 'GLITCH PROTOCOL',
+    nextTitle: 'Glitch Protocol',
   },
   'glitch-protocol': {
-    title: 'GLITCH PROTOCOL',
+    title: 'Glitch Protocol',
     category: 'Motion Graphics',
     year: '2024',
-    role: 'Motion Designer / Creative Lead',
-    tools: ['After Effects', 'Cinema 4D', 'Illustrator'],
+    role: 'Motion Designer / Editor',
+    tools: ['After Effects', 'Premiere Pro', 'Audition'],
     heroImg: '/assets/projects/glitch-protocol.png',
+    images: ['/assets/projects/glitch-protocol.png'],
     videoUrl: undefined,
-    challenge: 'Create a glitch-art motion system that felt controlled and intentional, not chaotic. Every distortion had to serve the narrative rhythm rather than distract from it.',
+    challenge: 'Creating a visual language for a tech brand built entirely around controlled distortion — glitch, pixel-shift, and signal decay turned into intentional design elements rather than noise.',
     process: [
-      { title: 'System', icon: Cpu, desc: 'Developed a reusable glitch expression library in After Effects.' },
-      { title: 'Timing', icon: Clock, desc: 'Frame-by-frame sync of distortion events to audio transients.' },
-      { title: 'Render', icon: Box, desc: 'Multi-pass Cinema 4D renders composited for maximum fidelity.' },
+      { title: 'Language', icon: Layers, desc: 'Defined a glitch dictionary: RGB splits, scan lines, block displacement, and signal loss sequences.' },
+      { title: 'Rhythm',   icon: Zap,   desc: 'Beat-synced glitch triggers keyed to the audio track for a punchy, percussive feel.' },
+      { title: 'Render',   icon: Film,  desc: 'Exported multi-format — 16:9, 9:16, and 1:1 — for full platform coverage.' },
     ],
-    results: 'Featured across digital platforms, the piece became a reference work for glitch aesthetics in the motion design community.',
+    results: 'Used as the brand\'s main reveal video at their product launch event. Achieved 200K+ organic views in the first week.',
     nextId: 'silent-echoes',
-    nextTitle: 'SILENT ECHOES',
+    nextTitle: 'Silent Echoes',
   },
   'silent-echoes': {
-    title: 'SILENT ECHOES',
-    category: 'Short Film',
+    title: 'Silent Echoes',
+    category: 'Short Films',
     year: '2023',
-    role: 'Director / Editor',
-    tools: ['Premiere Pro', 'DaVinci Resolve', 'After Effects'],
+    role: 'Director / Editor / Colorist',
+    tools: ['Premiere Pro', 'DaVinci Resolve', 'After Effects', 'Audition'],
     heroImg: '/assets/projects/silent-echoes.png',
+    images: ['/assets/projects/silent-echoes.png'],
     videoUrl: undefined,
-    challenge: 'A dialogue-free short film relying entirely on visual rhythm and sound design to carry an emotional arc. Every edit had to speak louder than words.',
+    challenge: 'A self-directed short exploring the emotional weight of silence. The challenge was building tension and atmosphere purely through visual rhythm and sound design — no dialogue, no exposition.',
     process: [
-      { title: 'Story', icon: Layers, desc: 'Visual script developed through thumbnail storyboards only.' },
-      { title: 'Edit', icon: Film, desc: 'Non-linear assembly with 3 distinct emotional acts.' },
-      { title: 'Color', icon: Monitor, desc: 'Muted, desaturated grade with isolated warm highlight pops.' },
+      { title: 'Edit',   icon: Film,    desc: 'Non-linear timeline structure designed to mirror the fractured mental state of the subject.' },
+      { title: 'Grade',  icon: Monitor, desc: 'Desaturated teal-and-orange grade with heavy vignetting and soft contrast curves.' },
+      { title: 'Sound',  icon: Layers,  desc: 'Custom sound design — ambient layering, reversed foley, and atonal drone beds built in Audition.' },
     ],
-    results: 'Screened at two regional film festivals. Praised for its restraint and emotional authenticity.',
+    results: 'Selected for a regional short film showcase. Opened two DM conversations from directors looking for editor-collaborators.',
     nextId: 'april-reel-2026',
-    nextTitle: 'APRIL REEL 2026',
+    nextTitle: 'April Reel 2026',
   },
   'april-reel-2026': {
-    title: 'APRIL REEL 2026',
-    category: 'Commercial',
+    title: 'April Reel 2026',
+    category: 'Commercials',
     year: '2026',
-    role: 'Lead Editor / Colorist',
-    tools: ['Premiere Pro', 'DaVinci Resolve', 'After Effects'],
-    heroImg: '/assets/projects/april-reel-2026.png',
+    role: 'Director / Editor',
+    tools: ['After Effects', 'Premiere Pro', 'DaVinci Resolve'],
+    heroImg: undefined,
+    images: [],
     videoUrl: 'https://res.cloudinary.com/dqbzoeysr/video/upload/3_April_2026_2_wanekk.mp4',
-    challenge: 'A fast-turnaround commercial reel capturing the best motion work of April 2026 — pure energy, precision cuts, and cinematic visual language.',
+    challenge: 'Monthly showreel cut for April 2026 — condensing a month of client work, personal experiments, and motion samples into a punchy 90-second reel that sells the range without losing focus.',
     process: [
-      { title: 'Cut', icon: Film, desc: 'Best-of selection edited to hit every beat of the track.' },
-      { title: 'Grade', icon: Monitor, desc: 'Unified color grade tying together footage from multiple projects.' },
-      { title: 'Deliver', icon: Zap, desc: 'Optimised for both full-res showcase and compressed social delivery.' },
+      { title: 'Select', icon: Layers, desc: 'Curated from 30+ clips — only frames that showed technique, variety, or raw quality made the cut.' },
+      { title: 'Pace',   icon: Zap,   desc: 'Tempo-mapped edit: fast cuts in the intro, sustained shots mid-reel, hard-close at the end.' },
+      { title: 'Sound',  icon: Film,  desc: 'Licensed track selected for energy curve — builds into the drop, fades hard on the logo lock-up.' },
     ],
-    results: 'Strongest reel to date. Immediate client interest within 24 hours of posting.',
+    results: 'Shared to X (@khalex3_0) and Telegram. Generated 3 inbound client conversations within 72 hours of posting.',
     nextId: 'liquid-flow-v02',
-    nextTitle: 'LIQUID FLOW V.02',
+    nextTitle: 'Liquid Flow V.02',
   },
   'liquid-flow-v02': {
-    title: 'LIQUID FLOW V.02',
+    title: 'Liquid Flow V.02',
     category: 'Personal Projects',
     year: '2023',
     role: 'Solo Creative / Motion Designer',
     tools: ['Cinema 4D', 'Octane', 'After Effects'],
     heroImg: '/assets/projects/liquid-flow-v02.png',
+    images: ['/assets/projects/liquid-flow-v02.png'],
     videoUrl: undefined,
-    challenge: 'An exploratory personal project studying fluid simulation at the intersection of organic motion and geometric precision. No brief, no deadline — pure craft.',
+    challenge: 'Pure exploration — fluid simulation studying organic motion against geometric precision. No client brief, no deadline. Just craft and curiosity, pushed as far as the hardware allowed.',
     process: [
-      { title: 'Sim', icon: Box, desc: 'X-Particles fluid simulation with custom turbulence fields.' },
-      { title: 'Light', icon: Zap, desc: 'HDRI-driven Octane lighting with caustic ray tracing enabled.' },
-      { title: 'Post', icon: Layers, desc: 'Chromatic aberration and grain layered in post for warmth.' },
+      { title: 'Sim',   icon: Box,    desc: 'X-Particles fluid simulation with custom turbulence fields and collision geometry.' },
+      { title: 'Light', icon: Zap,    desc: 'HDRI-driven Octane lighting with caustic ray tracing and multi-pass rendering.' },
+      { title: 'Post',  icon: Layers, desc: 'Chromatic aberration, film grain, and subtle lens bloom layered in AE post.' },
     ],
-    results: 'Shared on social to 40K+ organic impressions. Led to two unsolicited client inquiries for similar aesthetic work.',
+    results: 'Shared on socials — 40K+ organic impressions. Two unsolicited client inquiries for similar aesthetic work within the week.',
     nextId: 'the-analog-archive',
-    nextTitle: 'THE ANALOG ARCHIVE',
+    nextTitle: 'The Analog Archive',
   },
   'the-analog-archive': {
-    title: 'THE ANALOG ARCHIVE',
-    category: 'Documentary',
+    title: 'The Analog Archive',
+    category: 'Short Films',
     year: '2022',
     role: 'Director / Editor / Colorist',
     tools: ['Premiere Pro', 'After Effects', 'Audition'],
     heroImg: '/assets/projects/analog-archive.png',
+    images: ['/assets/projects/analog-archive.png'],
     videoUrl: undefined,
-    challenge: 'Preserving the texture and warmth of analogue film while assembling a feature-length documentary from archival footage spanning five decades.',
+    challenge: 'Preserving the warmth and texture of analogue film while assembling a documentary from archival footage spanning five decades — maintaining authenticity without losing visual cohesion.',
     process: [
-      { title: 'Archive', icon: Layers, desc: 'Digitised and catalogued 200+ hours of super-8 and 16mm footage.' },
-      { title: 'Structure', icon: Film, desc: 'Three-act narrative structure built from interview transcripts.' },
-      { title: 'Grade', icon: Monitor, desc: 'Film emulation grade preserving grain and gate weave artefacts.' },
+      { title: 'Archive',   icon: Layers,  desc: 'Catalogued and digitised 200+ hours of super-8 and 16mm footage from multiple sources.' },
+      { title: 'Structure', icon: Film,    desc: 'Three-act narrative built from interview transcripts and archival photograph sequencing.' },
+      { title: 'Grade',     icon: Monitor, desc: 'Film emulation grade preserving gate weave, grain, and natural colour decay.' },
     ],
-    results: 'Premiered at a regional documentary festival. Now in distribution across three streaming platforms.',
+    results: 'Premiered at a regional documentary festival. Now distributed across three streaming platforms.',
     nextId: 'cyberpunk-neon-noir',
-    nextTitle: 'CYBERPUNK NEON NOIR',
+    nextTitle: 'Cyberpunk Neon Noir',
   },
 };
 
+// ── Main component ─────────────────────────────────────────────────────────────
 export default function ProjectDetail() {
   const { id } = useParams<{ id: string }>();
   const project = (id && allProjects[id]) ? allProjects[id] : allProjects['cyberpunk-neon-noir'];
 
+  const hasVideo = !!project.videoUrl;
+  const hasImages = project.images && project.images.length > 0;
+
   return (
-    <main className="shutter-entrance">
-      {/* Hero */}
-      <section className="relative h-[80vh] w-full overflow-hidden flex items-end pb-20">
+    <main className="page-enter">
+      {/* ── HERO ── */}
+      <section className="relative h-[80vh] w-full overflow-hidden flex items-end pb-16">
         <div className="absolute inset-0 z-0">
-          <img
-            className="w-full h-full object-cover"
-            src={project.heroImg}
-            alt={project.title}
-            referrerPolicy="no-referrer"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
+          {hasVideo ? (
+            <video
+              src={project.videoUrl}
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="w-full h-full object-cover"
+            />
+          ) : project.heroImg ? (
+            <img
+              className="w-full h-full object-cover"
+              src={project.heroImg}
+              alt={project.title}
+            />
+          ) : (
+            <div className="w-full h-full bg-steel" />
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/50 to-ink/10" />
         </div>
-        <div className="relative z-10 px-8 md:pl-28 w-full max-w-7xl">
+
+        <div className="relative z-10 px-6 md:px-10 w-full max-w-[1600px] mx-auto">
           <Link
             to="/projects"
-            className="inline-flex items-center gap-2 text-primary font-headline font-bold uppercase tracking-widest text-xs mb-8 hover:translate-x-[-4px] transition-transform"
+            className="inline-flex items-center gap-2 font-mono text-[10px] text-ash hover:text-hot uppercase tracking-widest mb-8 transition-colors group"
           >
-            <ArrowLeft className="w-4 h-4" />
-            Back to Framework
+            <ArrowLeft className="w-3 h-3 group-hover:-translate-x-0.5 transition-transform" />
+            Back to Work
           </Link>
+
+          <div className="flex items-center gap-3 mb-4">
+            <span className="w-5 h-px bg-hot" />
+            <span className="font-mono text-[10px] text-hot uppercase tracking-[0.35em]">
+              {project.category} — {project.year}
+            </span>
+          </div>
+
           <motion.h1
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
-            className="font-headline text-6xl md:text-9xl font-black tracking-tighter leading-[0.8] mb-4"
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="font-display font-extrabold uppercase tracking-tighter leading-[0.82] text-paper"
+            style={{ fontSize: 'clamp(3rem, 8vw, 8rem)' }}
           >
             {project.title}
           </motion.h1>
-          <div className="flex flex-wrap gap-6 items-center">
-            <span className="text-secondary font-headline font-bold uppercase tracking-[0.3em] text-sm">{project.category}</span>
-            <div className="w-12 h-[1px] bg-outline-variant" />
-            <span className="text-on-surface-variant font-body text-xs uppercase tracking-widest">{project.year}</span>
-          </div>
         </div>
       </section>
 
-      {/* Project Info */}
-      <section className="py-24 px-8 md:px-28 bg-background">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16">
-          <div className="lg:col-span-4 space-y-12">
-            <div className="flex items-center gap-6 p-6 bg-surface-low rounded-md border border-outline-variant/10">
-              <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-primary/30 flex-shrink-0">
-                <AvatarPlaceholder />
-              </div>
-              <div>
-                <h3 className="font-headline text-xs uppercase tracking-[0.3em] text-primary mb-1">Directed by</h3>
-                <p className="text-lg font-headline font-bold text-white">Khalex</p>
-              </div>
+      {/* ── META ── */}
+      <section className="py-20 px-6 md:px-10 bg-ink">
+        <div className="max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16">
+          {/* Sidebar */}
+          <div className="lg:col-span-4 space-y-10">
+            <div className="bg-steel p-6 border-l-2 border-hot">
+              <div className="font-mono text-[9px] text-hot uppercase tracking-[0.35em] mb-2">Directed by</div>
+              <div className="font-display font-bold text-xl uppercase">Khalex</div>
+              <div className="font-mono text-[9px] text-ash mt-1">{project.role}</div>
             </div>
+
             <div>
-              <h3 className="font-headline text-xs uppercase tracking-[0.3em] text-primary mb-4">The Role</h3>
-              <p className="text-xl font-headline font-bold text-white">{project.role}</p>
-            </div>
-            <div>
-              <h3 className="font-headline text-xs uppercase tracking-[0.3em] text-primary mb-4">Technical Stack</h3>
-              <div className="flex flex-wrap gap-3">
+              <div className="font-mono text-[9px] text-ash uppercase tracking-[0.35em] mb-3">Technical Stack</div>
+              <div className="flex flex-wrap gap-2">
                 {project.tools.map((tool) => (
-                  <span key={tool} className="px-4 py-2 bg-surface-low border border-outline-variant/20 rounded-sm text-xs font-headline font-bold tracking-widest uppercase">
+                  <span
+                    key={tool}
+                    className="border border-wire px-3 py-1.5 font-mono text-[9px] uppercase tracking-widest text-fog"
+                  >
                     {tool}
                   </span>
                 ))}
               </div>
             </div>
           </div>
+
+          {/* Challenge text */}
           <div className="lg:col-span-8">
-            <h3 className="font-headline text-xs uppercase tracking-[0.3em] text-primary mb-6">The Challenge</h3>
-            <p className="text-2xl md:text-3xl font-body text-on-surface-variant leading-relaxed font-light">
+            <div className="font-mono text-[9px] text-ash uppercase tracking-[0.35em] mb-5">The Challenge</div>
+            <p className="font-display font-bold text-2xl md:text-3xl text-paper/90 leading-snug">
               {project.challenge}
             </p>
           </div>
         </div>
       </section>
 
-      {/* Visual Showcase */}
-      <section className="py-20 bg-surface-low">
-        <div className="max-w-[1400px] mx-auto px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Primary slot — video if available, else static image */}
-            <div className="rounded-md overflow-hidden aspect-video bg-black">
-              {project.videoUrl ? (
-                <CloudinaryVideo
-                  src={project.videoUrl}
-                  poster={project.heroImg}
-                  title={project.title}
-                  autoPlay
-                  loop
-                  className="w-full h-full"
-                />
-              ) : (
-                <div className="relative w-full h-full group cursor-pointer">
-                  <img
-                    src={project.heroImg}
-                    className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
-                    referrerPolicy="no-referrer"
-                    alt={project.title}
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <Play className="w-16 h-16 text-white fill-current opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </div>
-                </div>
-              )}
-            </div>
-            {/* Secondary slot — always static */}
-            <div className="rounded-md overflow-hidden aspect-video bg-black">
-              <img
-                src={project.heroImg}
-                className="w-full h-full object-cover"
-                referrerPolicy="no-referrer"
-                alt={project.title}
+      {/* ── VISUAL SHOWCASE ── */}
+      <section className="bg-smoke py-16 px-6 md:px-10">
+        <div className="max-w-[1600px] mx-auto space-y-3">
+          {/* Video if available */}
+          {hasVideo && (
+            <div className="w-full overflow-hidden border border-wire">
+              <CloudinaryVideo
+                src={project.videoUrl!}
+                poster={project.heroImg}
+                title={project.title}
+                autoPlay
+                loop
+                className="aspect-[16/9] w-full"
               />
             </div>
-          </div>
+          )}
+
+          {/* Image gallery */}
+          {hasImages && (
+            <div className={`grid gap-3 ${project.images!.length > 1 ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1'}`}>
+              {project.images!.map((img, i) => (
+                <div
+                  key={i}
+                  className="relative overflow-hidden bg-steel group"
+                >
+                  <img
+                    src={img}
+                    alt={`${project.title} — frame ${i + 1}`}
+                    className="w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                    style={{ aspectRatio: i === 0 && project.images!.length === 1 ? '16/9' : '4/3' }}
+                  />
+                  {/* No description on image cards — as requested */}
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Fallback if neither */}
+          {!hasVideo && !hasImages && (
+            <div className="aspect-video w-full bg-steel flex items-center justify-center">
+              <div className="flex flex-col items-center gap-3 text-wire">
+                <Play className="w-8 h-8" />
+                <span className="font-mono text-[10px] uppercase tracking-widest">Visual coming soon</span>
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
-      {/* Creative Process */}
-      <section className="py-32 px-8 bg-background">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="font-headline text-4xl font-black mb-16 tracking-tight">
-            The Creative <span className="text-secondary">Process</span>
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {project.process.map((step) => (
-              <div key={step.title} className="bg-surface-low p-10 rounded-md border-t-2 border-primary/20">
-                <div className="text-primary mb-6">
-                  <step.icon className="w-10 h-10" />
+      {/* ── CREATIVE PROCESS ── */}
+      <section className="py-28 px-6 md:px-10 bg-ink">
+        <div className="max-w-[1600px] mx-auto">
+          <div className="ruled-bottom pb-5 mb-14 flex items-baseline gap-5">
+            <span className="font-mono text-[10px] text-ash tracking-widest uppercase">Process</span>
+            <h2 className="font-display font-extrabold text-3xl md:text-4xl uppercase tracking-tighter">
+              How It <span className="text-hot italic">Happened</span>
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            {project.process.map((step, i) => (
+              <div key={step.title} className="bg-steel p-8 border-t-2 border-wire hover:border-hot transition-colors duration-300 group">
+                <div className="flex items-center justify-between mb-6">
+                  <step.icon className="w-5 h-5 text-ash group-hover:text-hot transition-colors" />
+                  <span className="font-mono text-[10px] text-wire tracking-widest">{String(i + 1).padStart(2, '0')}</span>
                 </div>
-                <h4 className="font-headline font-bold text-xl mb-4 uppercase tracking-widest">{step.title}</h4>
-                <p className="text-on-surface-variant font-body leading-relaxed">{step.desc}</p>
+                <h4 className="font-display font-bold text-xl uppercase tracking-tight mb-3">{step.title}</h4>
+                <p className="font-mono text-[10px] text-ash leading-relaxed">{step.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Results */}
-      <section className="py-32 bg-surface-high">
-        <div className="max-w-4xl mx-auto px-8 text-center">
-          <h3 className="font-headline text-xs uppercase tracking-[0.3em] text-secondary mb-8">The Results</h3>
-          <p className="text-3xl md:text-4xl font-headline font-bold text-white leading-tight mb-12 italic">
+      {/* ── RESULTS ── */}
+      <section className="py-28 bg-smoke px-6 md:px-10">
+        <div className="max-w-[900px] mx-auto">
+          <div className="font-mono text-[9px] text-hot uppercase tracking-[0.35em] mb-6">The Results</div>
+          <p className="font-display font-extrabold text-2xl md:text-4xl text-paper leading-snug">
             "{project.results}"
           </p>
         </div>
       </section>
 
-      {/* Next Project */}
-      <section className="py-20 border-t border-outline-variant/10">
-        <Link
-          to={`/projects/${project.nextId}`}
-          className="group block text-center py-20 hover:bg-white/5 transition-colors"
+      {/* ── NEXT PROJECT ── */}
+      <Link
+        to={`/projects/${project.nextId}`}
+        className="group flex flex-col items-center justify-center py-24 border-t border-wire bg-ink hover:bg-smoke transition-colors duration-300"
+      >
+        <span className="font-mono text-[10px] text-ash uppercase tracking-widest mb-3">Next Project</span>
+        <h2
+          className="font-display font-extrabold uppercase tracking-tighter text-paper group-hover:text-hot transition-colors duration-300 text-center"
+          style={{ fontSize: 'clamp(2.5rem, 7vw, 7rem)' }}
         >
-          <span className="text-on-surface-variant font-headline text-sm uppercase tracking-[0.5em] mb-4 block">Next Artifact</span>
-          <h2 className="text-5xl md:text-7xl font-black font-headline tracking-tighter group-hover:text-primary transition-colors">
-            {project.nextTitle}
-          </h2>
-        </Link>
-      </section>
+          {project.nextTitle}
+        </h2>
+        <div className="mt-6 w-8 h-8 border border-wire group-hover:border-hot flex items-center justify-center transition-colors">
+          <ArrowRight className="w-3.5 h-3.5 text-ash group-hover:text-hot transition-colors group-hover:translate-x-0.5 duration-200" />
+        </div>
+      </Link>
     </main>
   );
 }

@@ -1,146 +1,179 @@
 import { motion } from 'motion/react';
-import { Download, Play, Zap, Film, Box, Brush, PenTool, Waves, Music, Code, Terminal } from 'lucide-react';
-import { cn } from '@/src/lib/utils';
+import { Play } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Zap, Film, Box, Brush, PenTool, Waves, Music, Code, Terminal } from 'lucide-react';
 
-function HeadshotPlaceholder() {
-  return (
-    <img
-      src="/assets/pfp.png"
-      alt="Khalex"
-      className="w-full h-full object-cover object-top"
-    />
-  );
-}
+const tools = [
+  { name: 'After Effects', desc: 'Motion graphics, VFX compositing, and dynamic typography for brand and Web3 content.', icon: Zap,      highlight: true  },
+  { name: 'Premiere Pro',  desc: 'Video editing, color grading, and fast-turnaround content production.',                icon: Film,     highlight: false },
+  { name: 'Cinema 4D',     desc: 'Cinematic 3D visuals, high-fidelity renders, and premium content.',                    icon: Box,      highlight: true  },
+  { name: 'Photoshop',     desc: '',                                                                                      icon: Brush,    highlight: false },
+  { name: 'Illustrator',   desc: '',                                                                                      icon: PenTool,  highlight: false },
+  { name: 'DaVinci',       desc: '',                                                                                      icon: Waves,    highlight: false },
+  { name: 'Audition',      desc: '',                                                                                      icon: Music,    highlight: false },
+  { name: 'Lottie',        desc: '',                                                                                      icon: Code,     highlight: false },
+  { name: 'Expressions',   desc: '',                                                                                      icon: Terminal, highlight: false },
+];
+
+const timeline = [
+  {
+    date: '2023 — Present',
+    role: 'Motion Designer & Content Strategist',
+    desc: 'Creating motion graphics, brand videos, and social content for clients across industries. Building a video editing agency while growing a personal brand across YouTube and social platforms.',
+    accent: 'text-hot',
+    dot: 'bg-hot',
+  },
+  {
+    date: '2021 — 2023',
+    role: 'Freelance Video Editor & Motion Designer',
+    desc: 'Built a client base producing motion graphics, brand videos, and cinematic content for creators and businesses across Africa and globally.',
+    accent: 'text-paper/70',
+    dot: 'bg-paper/40',
+  },
+  {
+    date: '2020 — 2021',
+    role: 'Self-Taught Motion Designer',
+    desc: 'Started with DaVinci Resolve and After Effects — learning the craft through obsessive practice, tutorials, and real-world client work.',
+    accent: 'text-ash',
+    dot: 'bg-wire',
+  },
+];
 
 export default function About() {
   return (
-    <main className="pt-32 min-h-screen bg-mesh overflow-hidden shutter-entrance">
-      {/* Hero Section / Narrative */}
-      <section className="max-w-7xl mx-auto px-8 md:px-12 mb-32">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
-          {/* Headshot Column */}
-          <div className="lg:col-span-5 relative group">
-            <div className="absolute -inset-4 bg-primary/10 blur-3xl rounded-full opacity-50 group-hover:opacity-80 transition-opacity"></div>
-            <div className="relative overflow-hidden rounded-md bg-surface-low aspect-[4/5]">
-              <HeadshotPlaceholder />
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60"></div>
+    <main className="pt-28 min-h-screen page-enter">
+      {/* ── HERO ── */}
+      <section className="max-w-[1600px] mx-auto px-6 md:px-10 mb-28">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+          {/* Portrait */}
+          <motion.div
+            initial={{ opacity: 0, x: -12 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-5 relative"
+          >
+            <div className="relative overflow-hidden aspect-[4/5] bg-smoke">
+              <img
+                src="/assets/pfp.png"
+                alt="Khalex"
+                className="w-full h-full object-cover object-top"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-ink/40 to-transparent" />
             </div>
-            <div className="absolute -bottom-6 -right-6 hidden md:block">
-              <div className="bg-surface-high p-6 rounded-md border border-outline-variant/10 backdrop-blur-md">
-                <span className="text-primary font-headline text-4xl font-black block leading-none">4+</span>
-                <span className="text-on-surface-variant text-xs uppercase tracking-[0.2em] font-body">Years Creating</span>
-              </div>
+            {/* Hot badge */}
+            <div className="absolute -bottom-3 -right-3 md:right-0 bg-hot p-5">
+              <span className="font-display font-extrabold text-3xl text-ink block leading-none">4+</span>
+              <span className="font-mono text-[9px] text-ink/70 uppercase tracking-[0.25em]">Years</span>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Story Column */}
-          <div className="lg:col-span-7 flex flex-col pt-4">
-            <span className="text-secondary font-body text-xs uppercase tracking-[0.4em] mb-4 block">The Story</span>
-            <h1 className="font-headline text-5xl md:text-7xl font-bold tracking-tighter text-white mb-8 leading-[0.9]">
-              Motion Designer. <span className="text-primary text-glow-primary italic">Video</span> Editor. Storyteller.
-            </h1>
-            <div className="space-y-6 max-w-2xl">
-              <p className="font-body text-lg text-on-surface-variant leading-relaxed">
+          {/* Story */}
+          <div className="lg:col-span-7 lg:pt-6">
+            <div className="flex items-center gap-3 mb-5">
+              <span className="w-5 h-px bg-hot" />
+              <span className="font-mono text-[10px] text-hot uppercase tracking-[0.35em]">The Story</span>
+            </div>
+            <motion.h1
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1, duration: 0.55 }}
+              className="font-display font-extrabold uppercase tracking-tighter leading-[0.82] text-paper mb-7"
+              style={{ fontSize: 'clamp(2.8rem, 6vw, 5.5rem)' }}
+            >
+              Motion<br />
+              Designer.<br />
+              <span className="text-hot italic">Storyteller.</span>
+            </motion.h1>
+
+            <div className="space-y-4 max-w-xl">
+              <p className="font-mono text-[10px] text-ash leading-relaxed">
                 I'm Khalex — a Nigeria-based motion designer and video editor who builds visual content that actually works. From cinematic brand films and motion graphics to fast-turnaround social content, I bring ideas to life through deliberate craft and sharp execution.
               </p>
-              <p className="font-body text-lg text-on-surface-variant leading-relaxed">
+              <p className="font-mono text-[10px] text-ash leading-relaxed">
                 I run a daily YouTube channel, work with brands and creators across industries, and am building a full-service video editing agency. My work sits at the intersection of storytelling, design, and execution — content that doesn't just look good, it performs.
               </p>
-              <div className="pt-8 flex flex-wrap gap-4">
-                <button
-                  disabled
-                  className="inline-flex items-center gap-3 bg-white/20 text-white/40 px-8 py-4 rounded-sm font-headline font-bold uppercase tracking-widest text-sm cursor-not-allowed"
-                >
-                  <Download className="w-5 h-5" />
-                  Download Resume
-                </button>
-                <a
-                  href="/#showreel"
-                  className="inline-flex items-center gap-3 border border-outline-variant/30 px-8 py-4 rounded-sm font-headline font-bold uppercase tracking-widest text-sm hover:border-secondary hover:text-secondary transition-all"
-                >
-                  <Play className="w-5 h-5" />
-                  View Reel
-                </a>
-              </div>
+            </div>
+
+            <div className="flex flex-wrap gap-4 mt-8 ruled-top pt-7">
+              <a
+                href="/#showreel"
+                className="group flex items-center gap-3 bg-hot text-ink px-8 py-4 font-mono text-[10px] uppercase tracking-widest hover:bg-paper transition-colors duration-200"
+              >
+                <Play className="w-3.5 h-3.5" />
+                Watch Reel
+              </a>
+              <Link
+                to="/contact"
+                className="flex items-center gap-3 border border-wire hover:border-hot text-ash hover:text-hot px-8 py-4 font-mono text-[10px] uppercase tracking-widest transition-all duration-200"
+              >
+                Hire Me
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Technical Arsenal */}
-      <section className="bg-surface-low py-32">
-        <div className="max-w-7xl mx-auto px-8 md:px-12">
-          <div className="mb-16">
-            <h2 className="font-headline text-4xl font-bold tracking-tight text-white mb-2">Technical Arsenal</h2>
-            <p className="text-on-surface-variant font-body">The tools I use daily to produce content that stands out.</p>
+      {/* ── TECHNICAL ARSENAL ── */}
+      <section className="bg-smoke py-24">
+        <div className="max-w-[1600px] mx-auto px-6 md:px-10">
+          <div className="ruled-bottom pb-5 mb-12 flex items-baseline gap-5">
+            <span className="font-mono text-[10px] text-ash tracking-widest uppercase">02</span>
+            <h2 className="font-display font-extrabold text-4xl uppercase tracking-tighter">
+              Technical <span className="text-hot">Arsenal</span>
+            </h2>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-6">
-            <div className="md:col-span-2 lg:col-span-2 bg-surface-high p-8 rounded-md flex flex-col justify-between aspect-square md:aspect-auto group hover:bg-surface-highest transition-colors">
-              <div className="bg-primary/10 w-12 h-12 flex items-center justify-center rounded-sm">
-                <Zap className="w-6 h-6 text-primary" />
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2">
+            {/* Three feature cards */}
+            {tools.slice(0, 3).map((tool) => (
+              <div
+                key={tool.name}
+                className={`col-span-2 p-7 flex flex-col gap-5 ${
+                  tool.highlight ? 'bg-steel border-l-2 border-hot' : 'bg-steel'
+                }`}
+              >
+                <tool.icon className={`w-5 h-5 ${tool.highlight ? 'text-hot' : 'text-ash'}`} />
+                <div>
+                  <h3 className="font-display font-bold text-lg uppercase tracking-tight">{tool.name}</h3>
+                  <p className="font-mono text-[10px] text-ash leading-relaxed mt-1.5">{tool.desc}</p>
+                </div>
               </div>
-              <div>
-                <h3 className="font-headline text-2xl font-bold text-white mb-2">After Effects</h3>
-                <p className="text-on-surface-variant text-sm font-body">Motion graphics, VFX compositing, and dynamic typography for brand and Web3 content.</p>
-              </div>
-            </div>
-            <div className="md:col-span-2 lg:col-span-2 bg-surface-high p-8 rounded-md flex flex-col justify-between group hover:bg-surface-highest transition-colors">
-              <div className="bg-secondary/10 w-12 h-12 flex items-center justify-center rounded-sm">
-                <Film className="w-6 h-6 text-secondary" />
-              </div>
-              <div>
-                <h3 className="font-headline text-2xl font-bold text-white mb-2">Premiere Pro</h3>
-                <p className="text-on-surface-variant text-sm font-body">Video editing, color grading, and fast-turnaround content production.</p>
-              </div>
-            </div>
-            <div className="md:col-span-4 lg:col-span-2 bg-surface-high p-8 rounded-md flex flex-col justify-between aspect-square md:aspect-auto group hover:bg-surface-highest transition-colors border-2 border-primary/20">
-              <div className="bg-primary/20 w-12 h-12 flex items-center justify-center rounded-sm">
-                <Box className="w-6 h-6 text-primary" />
-              </div>
-              <div>
-                <h3 className="font-headline text-2xl font-bold text-white mb-2">Cinema 4D</h3>
-                <p className="text-on-surface-variant text-sm font-body">Cinematic visuals, 3D elements, and high-fidelity renders for premium content.</p>
-              </div>
-            </div>
-            {[
-              { name: 'Photoshop', icon: Brush },
-              { name: 'Illustrator', icon: PenTool },
-              { name: 'DaVinci', icon: Waves },
-              { name: 'Audition', icon: Music },
-              { name: 'Lottie', icon: Code },
-              { name: 'Expressions', icon: Terminal }
-            ].map((tool) => (
-              <div key={tool.name} className="bg-surface-highest p-6 rounded-md flex items-center gap-4">
-                <tool.icon className="w-5 h-5 text-on-surface-variant" />
-                <span className="font-headline font-bold text-sm tracking-widest uppercase">{tool.name}</span>
+            ))}
+
+            {/* Utility tiles */}
+            {tools.slice(3).map((tool) => (
+              <div key={tool.name} className="bg-iron p-5 flex items-center gap-3 col-span-1">
+                <tool.icon className="w-3.5 h-3.5 text-ash flex-shrink-0" />
+                <span className="font-mono text-[10px] uppercase tracking-widest text-fog">{tool.name}</span>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Experience Timeline */}
-      <section className="py-32 bg-background">
-        <div className="max-w-7xl mx-auto px-8 md:px-12">
-          <div className="flex flex-col md:flex-row gap-16">
-            <div className="md:w-1/3">
-              <h2 className="font-headline text-4xl font-bold tracking-tight text-white sticky top-40">Timeline of <br/><span className="text-secondary italic">My Journey</span></h2>
-            </div>
-            <div className="md:w-2/3 space-y-16">
-              {[
-                { date: '2023 — Present', role: 'Motion Designer & Content Strategist', desc: 'Creating motion graphics, brand videos, and social content for clients across industries. Building a video editing agency while growing a personal brand across YouTube and social platforms.', color: 'bg-primary' },
-                { date: '2021 — 2023', role: 'Freelance Video Editor & Motion Designer', desc: 'Built a client base producing motion graphics, brand videos, and cinematic content for creators and businesses across Africa and globally.', color: 'bg-secondary' },
-                { date: '2020 — 2021', role: 'Self-Taught Motion Designer', desc: 'Started with DaVinci Resolve and After Effects, learning the craft through obsessive practice, tutorials, and real-world client work.', color: 'bg-outline-variant' }
-              ].map((item) => (
-                <div key={item.date} className="relative pl-12 border-l border-outline-variant/20">
-                  <div className={cn("absolute -left-[5px] top-0 w-2.5 h-2.5 rounded-full", item.color)}></div>
-                  <span className={cn("font-headline font-bold tracking-widest uppercase text-sm", item.color.replace('bg-', 'text-'))}>{item.date}</span>
-                  <h4 className="text-2xl font-bold text-white mt-2 mb-4">{item.role}</h4>
-                  <p className="text-on-surface-variant font-body">{item.desc}</p>
-                </div>
-              ))}
-            </div>
+      {/* ── TIMELINE ── */}
+      <section className="py-24 bg-ink">
+        <div className="max-w-[1600px] mx-auto px-6 md:px-10">
+          <div className="ruled-bottom pb-5 mb-14 flex items-baseline gap-5">
+            <span className="font-mono text-[10px] text-ash tracking-widest uppercase">03</span>
+            <h2 className="font-display font-extrabold text-4xl uppercase tracking-tighter">
+              Timeline <span className="text-hot italic">of Journey</span>
+            </h2>
+          </div>
+
+          <div className="flex flex-col md:flex-row">
+            {timeline.map((item, i) => (
+              <div key={i} className="flex-1 border-l border-wire pl-6 pb-10 md:pb-0 md:pr-8">
+                <div className={`w-2 h-2 -ml-[4.5px] mb-5 rounded-full ${item.dot}`} />
+                <span className={`font-mono text-[10px] uppercase tracking-widest block mb-3 ${item.accent}`}>
+                  {item.date}
+                </span>
+                <h4 className="font-display font-bold text-lg uppercase tracking-tight mb-3 leading-tight">
+                  {item.role}
+                </h4>
+                <p className="font-mono text-[10px] text-ash leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
