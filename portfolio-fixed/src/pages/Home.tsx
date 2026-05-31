@@ -24,7 +24,7 @@ const testimonials = [
     initials: 'AO',
   },
   {
-    quote: 'Hands down the most cinematic reel I've seen from an independent creator. Delivery was fast, communication was flawless.',
+    quote: "Hands down the most cinematic reel I've seen from an independent creator. Delivery was fast, communication was flawless.",
     name: 'Daniel Reyes',
     role: 'Founder, Prism Films',
     initials: 'DR',
