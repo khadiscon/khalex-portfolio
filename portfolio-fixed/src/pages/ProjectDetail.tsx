@@ -1,9 +1,10 @@
 import { Link, useParams } from 'react-router-dom';
-import { motion } from 'motion/react';
+import { motion, useInView } from 'motion/react';
 import { ArrowLeft, ArrowRight, Zap, Film, Box, Layers, Monitor, Play } from 'lucide-react';
+import { useRef } from 'react';
 import CloudinaryVideo from '../components/CloudinaryVideo';
+import ParticleCanvas from '../components/ParticleCanvas';
 
-// ── Project data ──────────────────────────────────────────────────────────────
 const allProjects: Record<string, {
   title: string; category: string; year: string; role: string; tools: string[];
   heroImg?: string; images?: string[]; videoUrl?: string;
@@ -23,13 +24,12 @@ const allProjects: Record<string, {
     videoUrl: undefined,
     challenge: 'Concept-to-final motion piece capturing a neon-drenched, high-contrast aesthetic built for a futuristic brand launch. Every frame needed to feel like a frame from a film — not a social post.',
     process: [
-      { title: 'Concept', icon: Box,     desc: 'Moodboard-driven direction pulling from cyberpunk cinema, brutalist typography, and neon photography.' },
-      { title: 'Build',   icon: Zap,     desc: 'Cinema 4D base geometry with Octane lighting — layered neon glow passes rendered in separate AOVs.' },
-      { title: 'Post',    icon: Layers,  desc: 'AE compositing with lens flares, chromatic aberration, film grain, and tempo-synced cuts.' },
+      { title: 'Concept', icon: Box,    desc: 'Moodboard-driven direction pulling from cyberpunk cinema, brutalist typography, and neon photography.' },
+      { title: 'Build',   icon: Zap,    desc: 'Cinema 4D base geometry with Octane lighting — layered neon glow passes rendered in separate AOVs.' },
+      { title: 'Post',    icon: Layers, desc: 'AE compositing with lens flares, chromatic aberration, film grain, and tempo-synced cuts.' },
     ],
     results: 'Delivered in 3 days. Client extended scope to a full 3-piece motion campaign after viewing the first edit.',
-    nextId: 'glitch-protocol',
-    nextTitle: 'Glitch Protocol',
+    nextId: 'glitch-protocol', nextTitle: 'Glitch Protocol',
   },
   'glitch-protocol': {
     title: 'Glitch Protocol',
@@ -47,8 +47,7 @@ const allProjects: Record<string, {
       { title: 'Render',   icon: Film,  desc: 'Exported multi-format — 16:9, 9:16, and 1:1 — for full platform coverage.' },
     ],
     results: 'Used as the brand\'s main reveal video at their product launch event. Achieved 200K+ organic views in the first week.',
-    nextId: 'silent-echoes',
-    nextTitle: 'Silent Echoes',
+    nextId: 'silent-echoes', nextTitle: 'Silent Echoes',
   },
   'silent-echoes': {
     title: 'Silent Echoes',
@@ -61,13 +60,12 @@ const allProjects: Record<string, {
     videoUrl: undefined,
     challenge: 'A self-directed short exploring the emotional weight of silence. The challenge was building tension and atmosphere purely through visual rhythm and sound design — no dialogue, no exposition.',
     process: [
-      { title: 'Edit',   icon: Film,    desc: 'Non-linear timeline structure designed to mirror the fractured mental state of the subject.' },
-      { title: 'Grade',  icon: Monitor, desc: 'Desaturated teal-and-orange grade with heavy vignetting and soft contrast curves.' },
-      { title: 'Sound',  icon: Layers,  desc: 'Custom sound design — ambient layering, reversed foley, and atonal drone beds built in Audition.' },
+      { title: 'Edit',  icon: Film,    desc: 'Non-linear timeline structure designed to mirror the fractured mental state of the subject.' },
+      { title: 'Grade', icon: Monitor, desc: 'Desaturated teal-and-orange grade with heavy vignetting and soft contrast curves.' },
+      { title: 'Sound', icon: Layers,  desc: 'Custom sound design — ambient layering, reversed foley, and atonal drone beds built in Audition.' },
     ],
     results: 'Selected for a regional short film showcase. Opened two DM conversations from directors looking for editor-collaborators.',
-    nextId: 'april-reel-2026',
-    nextTitle: 'April Reel 2026',
+    nextId: 'april-reel-2026', nextTitle: 'April Reel 2026',
   },
   'april-reel-2026': {
     title: 'April Reel 2026',
@@ -85,8 +83,7 @@ const allProjects: Record<string, {
       { title: 'Sound',  icon: Film,  desc: 'Licensed track selected for energy curve — builds into the drop, fades hard on the logo lock-up.' },
     ],
     results: 'Shared to X (@khalex3_0) and Telegram. Generated 3 inbound client conversations within 72 hours of posting.',
-    nextId: 'liquid-flow-v02',
-    nextTitle: 'Liquid Flow V.02',
+    nextId: 'liquid-flow-v02', nextTitle: 'Liquid Flow V.02',
   },
   'liquid-flow-v02': {
     title: 'Liquid Flow V.02',
@@ -104,8 +101,7 @@ const allProjects: Record<string, {
       { title: 'Post',  icon: Layers, desc: 'Chromatic aberration, film grain, and subtle lens bloom layered in AE post.' },
     ],
     results: 'Shared on socials — 40K+ organic impressions. Two unsolicited client inquiries for similar aesthetic work within the week.',
-    nextId: 'the-analog-archive',
-    nextTitle: 'The Analog Archive',
+    nextId: 'the-analog-archive', nextTitle: 'The Analog Archive',
   },
   'the-analog-archive': {
     title: 'The Analog Archive',
@@ -123,45 +119,56 @@ const allProjects: Record<string, {
       { title: 'Grade',     icon: Monitor, desc: 'Film emulation grade preserving gate weave, grain, and natural colour decay.' },
     ],
     results: 'Premiered at a regional documentary festival. Now distributed across three streaming platforms.',
-    nextId: 'cyberpunk-neon-noir',
-    nextTitle: 'Cyberpunk Neon Noir',
+    nextId: 'cyberpunk-neon-noir', nextTitle: 'Cyberpunk Neon Noir',
   },
 };
 
-// ── Main component ─────────────────────────────────────────────────────────────
+function RevealItem({ children, delay = 0, className = '' }: { children: React.ReactNode; delay?: number; className?: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: '-50px' });
+  return (
+    <div
+      ref={ref}
+      className={className}
+      style={{
+        opacity: inView ? 1 : 0,
+        transform: inView ? 'translateY(0)' : 'translateY(24px)',
+        transition: `opacity 0.65s cubic-bezier(0.22,1,0.36,1) ${delay}s, transform 0.65s cubic-bezier(0.22,1,0.36,1) ${delay}s`,
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
 export default function ProjectDetail() {
   const { id } = useParams<{ id: string }>();
   const project = (id && allProjects[id]) ? allProjects[id] : allProjects['cyberpunk-neon-noir'];
 
-  const hasVideo = !!project.videoUrl;
+  const hasVideo  = !!project.videoUrl;
   const hasImages = project.images && project.images.length > 0;
 
   return (
     <main className="page-enter">
+
       {/* ── HERO ── */}
       <section className="relative h-[80vh] w-full overflow-hidden flex items-end pb-16">
+        {/* Background media */}
         <div className="absolute inset-0 z-0">
           {hasVideo ? (
-            <video
-              src={project.videoUrl}
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="w-full h-full object-cover"
-            />
+            <video src={project.videoUrl} autoPlay muted loop playsInline className="w-full h-full object-cover" />
           ) : project.heroImg ? (
-            <img
-              className="w-full h-full object-cover"
-              src={project.heroImg}
-              alt={project.title}
-            />
+            <img className="w-full h-full object-cover" src={project.heroImg} alt={project.title} />
           ) : (
             <div className="w-full h-full bg-steel" />
           )}
-          <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/50 to-ink/10" />
+          <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/55 to-ink/10" />
         </div>
 
+        {/* Particles layered over the hero */}
+        <ParticleCanvas intensity="low" />
+
+        {/* Content */}
         <div className="relative z-10 px-6 md:px-10 w-full max-w-[1600px] mx-auto">
           <Link
             to="/projects"
@@ -193,77 +200,73 @@ export default function ProjectDetail() {
       {/* ── META ── */}
       <section className="py-20 px-6 md:px-10 bg-ink">
         <div className="max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16">
+
           {/* Sidebar */}
-          <div className="lg:col-span-4 space-y-10">
+          <RevealItem className="lg:col-span-4 space-y-8">
             <div className="bg-steel p-6 border-l-2 border-hot">
               <div className="font-mono text-[9px] text-hot uppercase tracking-[0.35em] mb-2">Directed by</div>
               <div className="font-display font-bold text-xl uppercase">Khalex</div>
               <div className="font-mono text-[9px] text-ash mt-1">{project.role}</div>
             </div>
-
             <div>
               <div className="font-mono text-[9px] text-ash uppercase tracking-[0.35em] mb-3">Technical Stack</div>
               <div className="flex flex-wrap gap-2">
                 {project.tools.map((tool) => (
-                  <span
-                    key={tool}
-                    className="border border-wire px-3 py-1.5 font-mono text-[9px] uppercase tracking-widest text-fog"
-                  >
+                  <span key={tool} className="border border-wire px-3 py-1.5 font-mono text-[9px] uppercase tracking-widest text-ash hover:border-hot hover:text-hot transition-colors duration-200">
                     {tool}
                   </span>
                 ))}
               </div>
             </div>
-          </div>
+          </RevealItem>
 
-          {/* Challenge text */}
-          <div className="lg:col-span-8">
+          {/* Challenge */}
+          <RevealItem className="lg:col-span-8" delay={0.1}>
             <div className="font-mono text-[9px] text-ash uppercase tracking-[0.35em] mb-5">The Challenge</div>
             <p className="font-display font-bold text-2xl md:text-3xl text-paper/90 leading-snug">
               {project.challenge}
             </p>
-          </div>
+          </RevealItem>
         </div>
       </section>
 
       {/* ── VISUAL SHOWCASE ── */}
-      <section className="bg-smoke py-16 px-6 md:px-10">
-        <div className="max-w-[1600px] mx-auto space-y-3">
-          {/* Video if available */}
+      <section className="bg-smoke py-16 px-6 md:px-10 relative overflow-hidden">
+        <ParticleCanvas intensity="low" />
+        <div className="max-w-[1600px] mx-auto relative z-10 space-y-3">
           {hasVideo && (
-            <div className="w-full overflow-hidden border border-wire">
-              <CloudinaryVideo
-                src={project.videoUrl!}
-                poster={project.heroImg}
-                title={project.title}
-                autoPlay
-                loop
-                className="aspect-[16/9] w-full"
-              />
-            </div>
+            <RevealItem>
+              <div className="w-full overflow-hidden border border-wire/40">
+                <CloudinaryVideo
+                  src={project.videoUrl!}
+                  poster={project.heroImg}
+                  title={project.title}
+                  autoPlay
+                  loop
+                  className="aspect-[16/9] w-full"
+                />
+              </div>
+            </RevealItem>
           )}
-
-          {/* Image gallery */}
           {hasImages && (
             <div className={`grid gap-3 ${project.images!.length > 1 ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1'}`}>
               {project.images!.map((img, i) => (
-                <div
-                  key={i}
-                  className="relative overflow-hidden bg-steel group"
-                >
-                  <img
-                    src={img}
-                    alt={`${project.title} — frame ${i + 1}`}
-                    className="w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                    style={{ aspectRatio: i === 0 && project.images!.length === 1 ? '16/9' : '4/3' }}
-                  />
-                  {/* No description on image cards — as requested */}
-                </div>
+                <RevealItem key={i} delay={i * 0.08}>
+                  <div className="relative overflow-hidden bg-steel group">
+                    <img
+                      src={img}
+                      alt={`${project.title} — frame ${i + 1}`}
+                      className="w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                      style={{ aspectRatio: i === 0 && project.images!.length === 1 ? '16/9' : '4/3' }}
+                    />
+                    {/* Hot corner accent on hover */}
+                    <div className="absolute top-0 right-0 w-0 h-px bg-hot transition-all duration-500 group-hover:w-12" />
+                    <div className="absolute top-0 right-0 h-0 w-px bg-hot transition-all duration-500 group-hover:h-8" />
+                  </div>
+                </RevealItem>
               ))}
             </div>
           )}
-
-          {/* Fallback if neither */}
           {!hasVideo && !hasImages && (
             <div className="aspect-video w-full bg-steel flex items-center justify-center">
               <div className="flex flex-col items-center gap-3 text-wire">
@@ -278,51 +281,57 @@ export default function ProjectDetail() {
       {/* ── CREATIVE PROCESS ── */}
       <section className="py-28 px-6 md:px-10 bg-ink">
         <div className="max-w-[1600px] mx-auto">
-          <div className="ruled-bottom pb-5 mb-14 flex items-baseline gap-5">
+          <RevealItem className="ruled-bottom pb-5 mb-14 flex items-baseline gap-5">
             <span className="font-mono text-[10px] text-ash tracking-widest uppercase">Process</span>
             <h2 className="font-display font-extrabold text-3xl md:text-4xl uppercase tracking-tighter">
               How It <span className="text-hot italic">Happened</span>
             </h2>
-          </div>
+          </RevealItem>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             {project.process.map((step, i) => (
-              <div key={step.title} className="bg-steel p-8 border-t-2 border-wire hover:border-hot transition-colors duration-300 group">
-                <div className="flex items-center justify-between mb-6">
-                  <step.icon className="w-5 h-5 text-ash group-hover:text-hot transition-colors" />
-                  <span className="font-mono text-[10px] text-wire tracking-widest">{String(i + 1).padStart(2, '0')}</span>
+              <RevealItem key={step.title} delay={i * 0.1}>
+                <div className="bg-steel p-8 border-t-2 border-wire hover:border-hot transition-colors duration-300 group h-full">
+                  <div className="flex items-center justify-between mb-6">
+                    <step.icon className="w-5 h-5 text-ash group-hover:text-hot transition-colors" />
+                    <span className="font-mono text-[10px] text-wire tracking-widest">{String(i + 1).padStart(2, '0')}</span>
+                  </div>
+                  <h4 className="font-display font-bold text-xl uppercase tracking-tight mb-3 group-hover:text-hot transition-colors">{step.title}</h4>
+                  <p className="font-mono text-[10px] text-ash leading-relaxed">{step.desc}</p>
                 </div>
-                <h4 className="font-display font-bold text-xl uppercase tracking-tight mb-3">{step.title}</h4>
-                <p className="font-mono text-[10px] text-ash leading-relaxed">{step.desc}</p>
-              </div>
+              </RevealItem>
             ))}
           </div>
         </div>
       </section>
 
       {/* ── RESULTS ── */}
-      <section className="py-28 bg-smoke px-6 md:px-10">
-        <div className="max-w-[900px] mx-auto">
-          <div className="font-mono text-[9px] text-hot uppercase tracking-[0.35em] mb-6">The Results</div>
-          <p className="font-display font-extrabold text-2xl md:text-4xl text-paper leading-snug">
-            "{project.results}"
-          </p>
+      <section className="py-28 bg-smoke px-6 md:px-10 relative overflow-hidden">
+        <ParticleCanvas intensity="low" />
+        <div className="max-w-[900px] mx-auto relative z-10">
+          <RevealItem>
+            <div className="font-mono text-[9px] text-hot uppercase tracking-[0.35em] mb-6">The Results</div>
+            <p className="font-display font-extrabold text-2xl md:text-4xl text-paper leading-snug">
+              "{project.results}"
+            </p>
+          </RevealItem>
         </div>
       </section>
 
       {/* ── NEXT PROJECT ── */}
       <Link
         to={`/projects/${project.nextId}`}
-        className="group flex flex-col items-center justify-center py-24 border-t border-wire bg-ink hover:bg-smoke transition-colors duration-300"
+        className="group relative flex flex-col items-center justify-center py-24 border-t border-wire bg-ink hover:bg-smoke transition-colors duration-300 overflow-hidden"
       >
-        <span className="font-mono text-[10px] text-ash uppercase tracking-widest mb-3">Next Project</span>
+        <ParticleCanvas intensity="low" />
+        <span className="relative z-10 font-mono text-[10px] text-ash uppercase tracking-widest mb-3">Next Project</span>
         <h2
-          className="font-display font-extrabold uppercase tracking-tighter text-paper group-hover:text-hot transition-colors duration-300 text-center"
+          className="relative z-10 font-display font-extrabold uppercase tracking-tighter text-paper group-hover:text-hot transition-colors duration-300 text-center"
           style={{ fontSize: 'clamp(2.5rem, 7vw, 7rem)' }}
         >
           {project.nextTitle}
         </h2>
-        <div className="mt-6 w-8 h-8 border border-wire group-hover:border-hot flex items-center justify-center transition-colors">
+        <div className="relative z-10 mt-6 w-8 h-8 border border-wire group-hover:border-hot flex items-center justify-center transition-colors">
           <ArrowRight className="w-3.5 h-3.5 text-ash group-hover:text-hot transition-colors group-hover:translate-x-0.5 duration-200" />
         </div>
       </Link>

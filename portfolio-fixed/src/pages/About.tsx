@@ -1,7 +1,8 @@
-import { motion } from 'motion/react';
-import { Play } from 'lucide-react';
+import { motion, useInView } from 'motion/react';
+import { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Zap, Film, Box, Brush, PenTool, Waves, Music, Code, Terminal } from 'lucide-react';
+import { Zap, Film, Box, Brush, PenTool, Waves, Music, Code, Terminal, ArrowRight } from 'lucide-react';
+import ParticleCanvas from '../components/ParticleCanvas';
 
 const tools = [
   { name: 'After Effects', desc: 'Motion graphics, VFX compositing, and dynamic typography for brand and Web3 content.', icon: Zap,      highlight: true  },
@@ -39,12 +40,32 @@ const timeline = [
   },
 ];
 
+function RevealItem({ children, delay = 0, className = '' }: { children: React.ReactNode; delay?: number; className?: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: '-60px' });
+  return (
+    <div
+      ref={ref}
+      className={className}
+      style={{
+        opacity: inView ? 1 : 0,
+        transform: inView ? 'translateY(0)' : 'translateY(24px)',
+        transition: `opacity 0.65s cubic-bezier(0.22,1,0.36,1) ${delay}s, transform 0.65s cubic-bezier(0.22,1,0.36,1) ${delay}s`,
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
 export default function About() {
   return (
     <main className="pt-28 min-h-screen page-enter">
+
       {/* ── HERO ── */}
-      <section className="max-w-[1600px] mx-auto px-6 md:px-10 mb-28">
+      <section className="max-w-[1600px] mx-auto px-6 md:px-10 mb-28 relative">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+
           {/* Portrait */}
           <motion.div
             initial={{ opacity: 0, x: -12 }}
@@ -53,14 +74,9 @@ export default function About() {
             className="lg:col-span-5 relative"
           >
             <div className="relative overflow-hidden aspect-[4/5] bg-smoke">
-              <img
-                src="/assets/pfp.png"
-                alt="Khalex"
-                className="w-full h-full object-cover object-top"
-              />
+              <img src="/assets/pfp.png" alt="Khalex" className="w-full h-full object-cover object-top" />
               <div className="absolute inset-0 bg-gradient-to-t from-ink/40 to-transparent" />
             </div>
-            {/* Hot badge */}
             <div className="absolute -bottom-3 -right-3 md:right-0 bg-hot p-5">
               <span className="font-display font-extrabold text-3xl text-ink block leading-none">4+</span>
               <span className="font-mono text-[9px] text-ink/70 uppercase tracking-[0.25em]">Years</span>
@@ -78,103 +94,129 @@ export default function About() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1, duration: 0.55 }}
               className="font-display font-extrabold uppercase tracking-tighter leading-[0.82] text-paper mb-7"
-              style={{ fontSize: 'clamp(2.8rem, 6vw, 5.5rem)' }}
+              style={{ fontSize: 'clamp(2.5rem, 6vw, 5.5rem)' }}
             >
-              Motion<br />
-              Designer.<br />
-              <span className="text-hot italic">Storyteller.</span>
+              Motion Is My<br />
+              <span className="text-hot italic">Language.</span>
             </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              className="font-mono text-[10px] text-ash leading-relaxed max-w-lg mb-6"
+            >
+              I'm Khalex — a self-taught motion designer from Lagos, Nigeria. I've spent the last 4+ years obsessing over the craft: learning After Effects from scratch, mastering Cinema 4D, and building a freelance client base across Africa and globally.
+            </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.28, duration: 0.5 }}
+              className="font-mono text-[10px] text-ash leading-relaxed max-w-lg mb-10"
+            >
+              I don't just edit video. I craft experiences — kinetic, cinematic, intentional. Every project is a chance to push the boundary between brand communication and visual art.
+            </motion.p>
 
-            <div className="space-y-4 max-w-xl">
-              <p className="font-mono text-[10px] text-ash leading-relaxed">
-                I'm Khalex — a Nigeria-based motion designer and video editor who builds visual content that actually works. From cinematic brand films and motion graphics to fast-turnaround social content, I bring ideas to life through deliberate craft and sharp execution.
-              </p>
-              <p className="font-mono text-[10px] text-ash leading-relaxed">
-                I run a daily YouTube channel, work with brands and creators across industries, and am building a full-service video editing agency. My work sits at the intersection of storytelling, design, and execution — content that doesn't just look good, it performs.
-              </p>
-            </div>
-
-            <div className="flex flex-wrap gap-4 mt-8 ruled-top pt-7">
-              <a
-                href="/#showreel"
-                className="group flex items-center gap-3 bg-hot text-ink px-8 py-4 font-mono text-[10px] uppercase tracking-widest hover:bg-paper transition-colors duration-200"
-              >
-                <Play className="w-3.5 h-3.5" />
-                Watch Reel
-              </a>
-              <Link
-                to="/contact"
-                className="flex items-center gap-3 border border-wire hover:border-hot text-ash hover:text-hot px-8 py-4 font-mono text-[10px] uppercase tracking-widest transition-all duration-200"
-              >
-                Hire Me
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── TECHNICAL ARSENAL ── */}
-      <section className="bg-smoke py-24">
-        <div className="max-w-[1600px] mx-auto px-6 md:px-10">
-          <div className="ruled-bottom pb-5 mb-12 flex items-baseline gap-5">
-            <span className="font-mono text-[10px] text-ash tracking-widest uppercase">02</span>
-            <h2 className="font-display font-extrabold text-4xl uppercase tracking-tighter">
-              Technical <span className="text-hot">Arsenal</span>
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2">
-            {/* Three feature cards */}
-            {tools.slice(0, 3).map((tool) => (
-              <div
-                key={tool.name}
-                className={`col-span-2 p-7 flex flex-col gap-5 ${
-                  tool.highlight ? 'bg-steel border-l-2 border-hot' : 'bg-steel'
-                }`}
-              >
-                <tool.icon className={`w-5 h-5 ${tool.highlight ? 'text-hot' : 'text-ash'}`} />
-                <div>
-                  <h3 className="font-display font-bold text-lg uppercase tracking-tight">{tool.name}</h3>
-                  <p className="font-mono text-[10px] text-ash leading-relaxed mt-1.5">{tool.desc}</p>
+            {/* Stats row */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.36, duration: 0.5 }}
+              className="flex gap-10 ruled-top pt-7"
+            >
+              {[['4+', 'Years Active'], ['50+', 'Projects'], ['3', 'Continents'], ['∞', 'Frames']].map(([n, l]) => (
+                <div key={l}>
+                  <div className="font-display font-extrabold text-3xl text-hot leading-none">{n}</div>
+                  <div className="font-mono text-[9px] text-ash uppercase tracking-widest mt-1.5">{l}</div>
                 </div>
-              </div>
-            ))}
-
-            {/* Utility tiles */}
-            {tools.slice(3).map((tool) => (
-              <div key={tool.name} className="bg-iron p-5 flex items-center gap-3 col-span-1">
-                <tool.icon className="w-3.5 h-3.5 text-ash flex-shrink-0" />
-                <span className="font-mono text-[10px] uppercase tracking-widest text-fog">{tool.name}</span>
-              </div>
-            ))}
+              ))}
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* ── TIMELINE ── */}
-      <section className="py-24 bg-ink">
-        <div className="max-w-[1600px] mx-auto px-6 md:px-10">
-          <div className="ruled-bottom pb-5 mb-14 flex items-baseline gap-5">
-            <span className="font-mono text-[10px] text-ash tracking-widest uppercase">03</span>
-            <h2 className="font-display font-extrabold text-4xl uppercase tracking-tighter">
-              Timeline <span className="text-hot italic">of Journey</span>
+      <section className="bg-smoke py-24 px-6 md:px-10 relative overflow-hidden">
+        <ParticleCanvas intensity="low" />
+        <div className="max-w-[1600px] mx-auto relative z-10">
+          <RevealItem className="flex items-baseline gap-5 ruled-bottom pb-5 mb-14">
+            <span className="font-mono text-[10px] text-ash tracking-widest uppercase">02</span>
+            <h2 className="font-display font-extrabold text-4xl md:text-5xl uppercase tracking-tighter">
+              The <span className="text-hot">Journey</span>
             </h2>
-          </div>
+          </RevealItem>
 
-          <div className="flex flex-col md:flex-row">
+          <div className="flex flex-col gap-0">
             {timeline.map((item, i) => (
-              <div key={i} className="flex-1 border-l border-wire pl-6 pb-10 md:pb-0 md:pr-8">
-                <div className={`w-2 h-2 -ml-[4.5px] mb-5 rounded-full ${item.dot}`} />
-                <span className={`font-mono text-[10px] uppercase tracking-widest block mb-3 ${item.accent}`}>
-                  {item.date}
-                </span>
-                <h4 className="font-display font-bold text-lg uppercase tracking-tight mb-3 leading-tight">
-                  {item.role}
-                </h4>
-                <p className="font-mono text-[10px] text-ash leading-relaxed">{item.desc}</p>
-              </div>
+              <RevealItem key={i} delay={i * 0.1} className="grid grid-cols-1 md:grid-cols-12 gap-6 py-10 ruled-bottom last:border-0">
+                <div className="md:col-span-3 flex items-start gap-3">
+                  <div className={`w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0 ${item.dot}`} />
+                  <span className="font-mono text-[10px] text-ash tracking-widest">{item.date}</span>
+                </div>
+                <div className="md:col-span-9">
+                  <h3 className={`font-display font-bold text-xl uppercase tracking-tight mb-3 ${item.accent}`}>{item.role}</h3>
+                  <p className="font-mono text-[10px] text-ash leading-relaxed max-w-2xl">{item.desc}</p>
+                </div>
+              </RevealItem>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ── TOOLS ── */}
+      <section className="bg-ink py-24 px-6 md:px-10">
+        <div className="max-w-[1600px] mx-auto">
+          <RevealItem className="flex items-baseline gap-5 ruled-bottom pb-5 mb-14">
+            <span className="font-mono text-[10px] text-ash tracking-widest uppercase">03</span>
+            <h2 className="font-display font-extrabold text-4xl md:text-5xl uppercase tracking-tighter">
+              The <span className="text-hot">Stack</span>
+            </h2>
+          </RevealItem>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-wire/20">
+            {tools.map((tool, i) => {
+              const Icon = tool.icon;
+              return (
+                <RevealItem key={tool.name} delay={i * 0.05}>
+                  <div className={`p-7 group hover:bg-smoke transition-colors duration-300 ${tool.highlight ? 'bg-steel' : 'bg-ink'}`}>
+                    <div className="flex items-center gap-3 mb-3">
+                      <Icon className={`w-4 h-4 ${tool.highlight ? 'text-hot' : 'text-ash'} group-hover:text-hot transition-colors`} />
+                      <span className="font-display font-bold text-base uppercase tracking-tight text-paper group-hover:text-hot transition-colors">
+                        {tool.name}
+                      </span>
+                      {tool.highlight && (
+                        <span className="ml-auto font-mono text-[8px] text-hot border border-hot/30 px-1.5 py-0.5 tracking-widest">CORE</span>
+                      )}
+                    </div>
+                    {tool.desc && (
+                      <p className="font-mono text-[10px] text-ash leading-relaxed">{tool.desc}</p>
+                    )}
+                  </div>
+                </RevealItem>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ── CTA ── */}
+      <section className="bg-smoke py-20 px-6 md:px-10 relative overflow-hidden">
+        <ParticleCanvas intensity="low" />
+        <div className="max-w-[1600px] mx-auto relative z-10">
+          <RevealItem className="ruled-top pt-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+            <div>
+              <h2 className="font-display font-extrabold text-3xl md:text-5xl uppercase tracking-tighter mb-2">
+                Want to <span className="text-hot">Collaborate?</span>
+              </h2>
+              <p className="font-mono text-[10px] text-ash">Let's build something people can't ignore.</p>
+            </div>
+            <Link
+              to="/contact"
+              className="group flex items-center gap-3 bg-hot text-ink px-10 py-5 font-mono text-[10px] uppercase tracking-widest hover:bg-paper transition-colors duration-200 flex-shrink-0"
+            >
+              Get In Touch
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </RevealItem>
         </div>
       </section>
     </main>
